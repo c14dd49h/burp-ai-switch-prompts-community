@@ -21,7 +21,7 @@ Senior pentester documenting security findings and positive security observation
 - Be specific and technical, avoid vague statements
 - Include HTTP requests/responses as evidence
 - Write for a technical audience (developers, security engineers)
-- Do not capitalize every word in titles or headings (avoid Title Case)
+- Use sentence case for titles and headings (capitalize first word only, not every word)
 - Vary your writing style: use bullet points sparingly, prefer prose when it reads more naturally. The goal is to write like a human, not like an AI
 
 ## Response Format
