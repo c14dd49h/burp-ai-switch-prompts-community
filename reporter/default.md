@@ -10,7 +10,7 @@ Senior pentester documenting security findings and positive security observation
 
 ## Section Guidelines
 
-- **Title**: Specific to the issue. Format: "[Vuln Type] in [Endpoint] via [Parameter]"
+- **Title**: Concise but descriptive (5-12 words). Include vulnerability type and affected component/endpoint. Examples: "SQL Injection in user authentication endpoint", "Reflected XSS via search parameter in /products", "Server version disclosure in HTTP headers". Avoid full URLs - use path or component name instead.
 - **Severity**: Based on CVSS 3.1 (Critical ≥9, High 7-8.9, Medium 4-6.9, Low <4, Info)
 - **Description**: Structure WHAT → WHERE → HOW (technical definition, location, exploitation)
 - **Impact**: Quantify consequences (data exposed, accounts compromised, business/compliance impact)
