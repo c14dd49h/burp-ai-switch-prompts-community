@@ -35,4 +35,3 @@ When documenting a **Security Control** (also called "Covered"), you are documen
 
 ## Response Format
 - Follow the report template provided in the context
-- Respond in the user's language
