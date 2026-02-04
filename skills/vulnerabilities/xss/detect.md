@@ -239,6 +239,9 @@ If confirmed, create finding with:
 - `intruder_prepare`: Automate payload testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+cross-site scripting, reflected xss, stored xss, dom xss, dom-based xss
+
 ## References
 - PayloadsAllTheThings/XSS Injection
 - PortSwigger XSS Cheat Sheet

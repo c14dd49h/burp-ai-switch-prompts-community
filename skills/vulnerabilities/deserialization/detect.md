@@ -260,6 +260,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+deserialisation, insecure deserialization, object injection
+
 ## References
 - PayloadsAllTheThings/Insecure Deserialization
 - ysoserial (Java) / ysoserial.net (.NET)

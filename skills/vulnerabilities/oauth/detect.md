@@ -226,6 +226,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+oauth2, openid, openid connect
+
 ## References
 - PayloadsAllTheThings/OAuth Misconfiguration
 - PortSwigger OAuth Vulnerabilities

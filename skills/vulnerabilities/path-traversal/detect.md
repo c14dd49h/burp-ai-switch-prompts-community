@@ -237,6 +237,9 @@ If confirmed, create finding with:
 - `intruder_prepare`: Automate path fuzzing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+lfi, local file inclusion, directory traversal, file inclusion, traversal
+
 ## References
 - PayloadsAllTheThings/Directory Traversal
 - PayloadsAllTheThings/File Inclusion

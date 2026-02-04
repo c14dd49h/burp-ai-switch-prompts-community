@@ -15,3 +15,6 @@ Perform deep analysis of HTTP requests and responses to identify potential secur
 - request_parse: Parse request structure
 - response_parse: Parse response structure
 - find_reflected: Check for input reflections
+
+## Keywords
+analyze request, analyse, request analysis

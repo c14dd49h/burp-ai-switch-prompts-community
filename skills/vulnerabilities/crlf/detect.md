@@ -251,6 +251,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+header injection, http response splitting, response splitting
+
 ## References
 - PayloadsAllTheThings/CRLF Injection
 - OWASP HTTP Response Splitting

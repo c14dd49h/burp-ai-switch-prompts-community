@@ -247,6 +247,9 @@ If confirmed, create finding with:
 - `collaborator_generate` / `collaborator_poll`: OOB verification
 - `issue_create`: Report confirmed finding
 
+## Keywords
+file upload, upload vulnerability, unrestricted upload
+
 ## References
 - PayloadsAllTheThings/Upload Insecure Files
 - OWASP File Upload

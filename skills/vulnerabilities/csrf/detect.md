@@ -213,6 +213,9 @@ If confirmed, create finding with:
 - `params_extract`: Identify token parameters
 - `issue_create`: Report confirmed finding
 
+## Keywords
+xsrf, cross-site request forgery
+
 ## References
 - PayloadsAllTheThings/CSRF
 - OWASP CSRF Prevention Cheat Sheet

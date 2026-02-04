@@ -234,6 +234,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+redirect, url redirect, redirection, open redirect
+
 ## References
 - PayloadsAllTheThings/Open Redirect
 - OWASP Unvalidated Redirects

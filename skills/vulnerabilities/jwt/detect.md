@@ -225,6 +225,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+json web token, jwt attack
+
 ## References
 - PayloadsAllTheThings/JSON Web Token
 - Auth0 JWT Handbook

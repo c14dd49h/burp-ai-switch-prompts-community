@@ -156,6 +156,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+rce, remote code execution, os injection, os command, injection de commande
+
 ## References
 - PayloadsAllTheThings/Command Injection
 - OWASP Command Injection

@@ -186,6 +186,9 @@ If confirmed, create finding with:
 - `base64_decode`: Decode exfiltrated data
 - `issue_create`: Report confirmed finding
 
+## Keywords
+xml external entity, xml injection
+
 ## References
 - PayloadsAllTheThings/XXE Injection
 - OWASP XXE Prevention Cheat Sheet

@@ -187,6 +187,9 @@ If confirmed, create finding with:
 - `repeater_tab_with_payload`: Manual testing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+template injection, server-side template injection
+
 ## References
 - PayloadsAllTheThings/Server Side Template Injection
 - PortSwigger SSTI Research

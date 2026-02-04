@@ -226,6 +226,9 @@ If confirmed, create finding with:
 - `intruder_prepare`: Port scanning, IP enumeration
 - `issue_create`: Report confirmed finding
 
+## Keywords
+server-side request forgery, server side request forgery
+
 ## References
 - PayloadsAllTheThings/Server Side Request Forgery
 - PortSwigger SSRF Research

@@ -204,6 +204,9 @@ Create summary with:
 - `site_map`: Review discovered paths
 - `params_extract`: Identify technology-specific parameters
 
+## Keywords
+fingerprint, technology detection, stack detection, waf detection, server detection
+
 ## References
 - PayloadsAllTheThings/Methodology and Resources
 - Wappalyzer Technology Database

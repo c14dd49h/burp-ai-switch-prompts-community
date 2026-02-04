@@ -223,6 +223,9 @@ If confirmed, create finding with:
 - `intruder_prepare`: Enumerate IDs
 - `issue_create`: Report confirmed finding
 
+## Keywords
+idor, broken access control, privilege escalation, bac, authorization bypass
+
 ## References
 - PayloadsAllTheThings/Insecure Direct Object References
 - OWASP Broken Access Control

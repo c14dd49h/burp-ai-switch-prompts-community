@@ -196,6 +196,9 @@ If confirmed, create finding with:
 - `intruder_prepare`: Automate origin fuzzing
 - `issue_create`: Report confirmed finding
 
+## Keywords
+cross-origin, cross origin resource sharing
+
 ## References
 - PayloadsAllTheThings/CORS Misconfiguration
 - PortSwigger CORS Research

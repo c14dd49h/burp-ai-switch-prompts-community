@@ -160,6 +160,9 @@ python -c 'import pty;pty.spawn("/bin/bash")'
 - `http1_request`: Deliver payloads
 - `collaborator_generate`: Generate callback URLs
 
+## Keywords
+payload generation, generate payload, wordlist, custom payload
+
 ## References
 - PayloadsAllTheThings (All sections)
 - RevShells.com

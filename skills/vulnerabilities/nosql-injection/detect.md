@@ -259,6 +259,9 @@ If confirmed, create finding with:
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `issue_create`: Report confirmed finding
 
+## Keywords
+nosql, mongodb injection, mongo injection
+
 ## References
 - PayloadsAllTheThings/NoSQL Injection
 - OWASP NoSQL Injection

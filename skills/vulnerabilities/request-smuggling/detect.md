@@ -257,6 +257,9 @@ Document smuggling vulnerability with:
 - `collaborator_generate` / `collaborator_poll`: OOB confirmation
 - `issue_create`: Report confirmed finding
 
+## Keywords
+http smuggling, desync, http desync, cl.te, te.cl
+
 ## References
 - PayloadsAllTheThings/Request Smuggling
 - PortSwigger Request Smuggling Research

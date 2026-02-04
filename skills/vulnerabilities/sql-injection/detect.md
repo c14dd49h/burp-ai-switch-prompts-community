@@ -170,6 +170,9 @@ If confirmed, create finding with:
 - `collaborator_generate` / `collaborator_poll`: OOB verification
 - `issue_create`: Report confirmed finding
 
+## Keywords
+sqli, injection sql, blind sql, error-based sql, union sql, time-based sql
+
 ## References
 - PayloadsAllTheThings/SQL Injection
 - OWASP Testing Guide - SQL Injection
