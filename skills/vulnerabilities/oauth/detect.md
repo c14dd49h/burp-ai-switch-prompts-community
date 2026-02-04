@@ -219,12 +219,17 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Test OAuth endpoints
 - `jwt_decode`: Analyze ID tokens
 - `collaborator_generate` / `collaborator_poll`: Token exfiltration
 - `url_encode`: Encode redirect URIs
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Navigate through OAuth flow in browser
+- `list_network_requests`: Capture OAuth redirects and token exchanges
 
 ## Keywords
 oauth2, openid, openid connect

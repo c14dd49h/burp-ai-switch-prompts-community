@@ -150,11 +150,12 @@ If confirmed, create finding with:
 - Evidence (command output, time delay, DNS callback)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Enumerate all parameters
 - `http1_request`: Send test requests
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 rce, remote code execution, os injection, os command, injection de commande

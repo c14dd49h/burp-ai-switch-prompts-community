@@ -181,11 +181,12 @@ If confirmed, create finding with:
 - Evidence (calculation result, command output)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `find_reflected`: Identify reflection points
 - `http1_request`: Send test payloads
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 template injection, server-side template injection

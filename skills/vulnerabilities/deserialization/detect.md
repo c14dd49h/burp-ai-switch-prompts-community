@@ -254,11 +254,12 @@ If confirmed, create finding with:
 - Impact assessment (RCE, DoS)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Send payloads
 - `base64_encode` / `base64_decode`: Encode/decode payloads
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 deserialisation, insecure deserialization, object injection

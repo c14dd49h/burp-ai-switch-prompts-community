@@ -162,13 +162,14 @@ If confirmed, create finding with:
 - Evidence (response diff, error message, time delay)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: List all parameters
 - `find_reflected`: Check for reflections
 - `http1_request` / `http2_request`: Send test requests
 - `repeater_tab_with_payload`: Send to Repeater for manual testing
 - `intruder_prepare`: Automate payload testing
 - `collaborator_generate` / `collaborator_poll`: OOB verification
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 sqli, injection sql, blind sql, error-based sql, union sql, time-based sql

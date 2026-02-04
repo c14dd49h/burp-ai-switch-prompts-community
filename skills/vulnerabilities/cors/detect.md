@@ -191,10 +191,15 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Test origin variations
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Automate origin fuzzing
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `evaluate_script`: Execute cross-origin requests to verify CORS behavior
+- `list_console_messages`: Check for CORS-related errors
 
 ## Keywords
 cross-origin, cross origin resource sharing

@@ -229,13 +229,14 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Identify file parameters
 - `http1_request` / `http2_request`: Send traversal payloads
 - `url_encode`: Encode payloads
 - `base64_decode`: Decode PHP filter output
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Automate path fuzzing
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 lfi, local file inclusion, directory traversal, file inclusion, traversal

@@ -155,6 +155,8 @@ python -c 'import pty;pty.spawn("/bin/bash")'
 ```
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `base64_encode` / `base64_decode`: Encode payloads
 - `url_encode` / `url_decode`: URL encode payloads
 - `http1_request`: Deliver payloads

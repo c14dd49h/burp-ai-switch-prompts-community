@@ -216,12 +216,16 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Identify resource identifiers
 - `http1_request` / `http2_request`: Test access
 - `jwt_decode`: Analyze tokens
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Enumerate IDs
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Navigate to target endpoints with different sessions
 
 ## Keywords
 idor, broken access control, privilege escalation, bac, authorization bypass

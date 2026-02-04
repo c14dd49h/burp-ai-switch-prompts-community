@@ -219,12 +219,13 @@ If confirmed, create finding with:
 - Impact (internal network access, cloud metadata, etc.)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Find URL-accepting parameters
 - `http1_request` / `http2_request`: Send test requests
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Port scanning, IP enumeration
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 server-side request forgery, server side request forgery

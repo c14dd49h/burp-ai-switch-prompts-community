@@ -180,11 +180,12 @@ If confirmed, create finding with:
 - Impact (file read, SSRF, DoS)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request`: Send XML payloads
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
 - `base64_decode`: Decode exfiltrated data
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 xml external entity, xml injection

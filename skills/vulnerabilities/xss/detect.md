@@ -232,12 +232,19 @@ If confirmed, create finding with:
 - Evidence (screenshot, response showing injection)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `find_reflected`: Identify reflection points
 - `http1_request` / `http2_request`: Send test payloads
 - `url_encode` / `base64_encode`: Encode payloads
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Automate payload testing
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Navigate to target URL
+- `evaluate_script`: Execute JavaScript to test DOM XSS
+- `list_console_messages`: Check for JavaScript errors
+- `take_screenshot`: Capture evidence of XSS execution
 
 ## Keywords
 cross-site scripting, reflected xss, stored xss, dom xss, dom-based xss

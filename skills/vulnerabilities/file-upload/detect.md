@@ -241,11 +241,17 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Test uploads
 - `repeater_tab_with_payload`: Manual testing
 - `url_encode` / `base64_encode`: Encode filenames
 - `collaborator_generate` / `collaborator_poll`: OOB verification
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Navigate to upload page
+- `upload_file`: Upload test files through the browser
+- `take_screenshot`: Capture evidence of uploaded file execution
 
 ## Keywords
 file upload, upload vulnerability, unrestricted upload

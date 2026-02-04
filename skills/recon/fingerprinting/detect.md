@@ -199,10 +199,17 @@ Create summary with:
 - Known vulnerabilities for versions
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Request indicator files
 - `proxy_history`: Analyze captured traffic
 - `site_map`: Review discovered paths
 - `params_extract`: Identify technology-specific parameters
+
+### Chrome
+- `evaluate_script`: Execute JavaScript to detect client-side frameworks
+- `list_network_requests`: Analyze loaded resources and CDN patterns
+- `take_snapshot`: Capture page structure for technology identification
 
 ## Keywords
 fingerprint, technology detection, stack detection, waf detection, server detection

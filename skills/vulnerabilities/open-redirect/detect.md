@@ -227,12 +227,16 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Identify redirect parameters
 - `http1_request` / `http2_request`: Test redirects
 - `url_encode`: Encode payloads
 - `collaborator_generate` / `collaborator_poll`: OOB detection
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Follow redirect chains in browser
 
 ## Keywords
 redirect, url redirect, redirection, open redirect

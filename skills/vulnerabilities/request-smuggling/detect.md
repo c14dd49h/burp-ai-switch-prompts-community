@@ -251,11 +251,12 @@ Document smuggling vulnerability with:
 - Evidence (responses, timing data)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request`: Send raw HTTP/1.1 requests
 - `http2_request`: Send HTTP/2 requests
 - `repeater_tab_with_payload`: Manual testing
 - `collaborator_generate` / `collaborator_poll`: OOB confirmation
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 http smuggling, desync, http desync, cl.te, te.cl

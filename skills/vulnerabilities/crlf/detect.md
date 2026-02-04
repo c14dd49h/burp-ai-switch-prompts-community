@@ -245,11 +245,12 @@ If confirmed, create finding with:
 - Impact (XSS, session fixation, cache poisoning)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `params_extract`: Identify parameters reflected in headers
 - `http1_request` / `http2_request`: Test CRLF payloads
 - `url_encode`: Encode payloads
 - `repeater_tab_with_payload`: Manual testing
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 header injection, http response splitting, response splitting

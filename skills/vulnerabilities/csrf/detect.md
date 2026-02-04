@@ -208,10 +208,16 @@ If confirmed, create finding with:
 - Evidence (successful state change)
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Test without tokens
 - `repeater_tab_with_payload`: Manual testing
 - `params_extract`: Identify token parameters
-- `issue_create`: Report confirmed finding
+
+### Chrome
+- `navigate_page`: Navigate to target page
+- `fill_form`: Fill form fields for CSRF testing
+- `click`: Submit forms to test CSRF protection
 
 ## Keywords
 xsrf, cross-site request forgery

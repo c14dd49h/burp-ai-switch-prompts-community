@@ -253,11 +253,12 @@ If confirmed, create finding with:
 - Impact assessment
 
 ## MCP Tools to Use
+
+### BurpSuite
 - `http1_request` / `http2_request`: Send test payloads
 - `repeater_tab_with_payload`: Manual testing
 - `intruder_prepare`: Automate extraction
 - `collaborator_generate` / `collaborator_poll`: OOB detection
-- `issue_create`: Report confirmed finding
 
 ## Keywords
 nosql, mongodb injection, mongo injection
