@@ -222,14 +222,14 @@ If Content-Security-Policy is present:
 - Try data: or blob: URIs if allowed
 
 ### 9. Confirm and Document
-Use browser or `http1_request` to verify execution.
+Use `http1_request` or `http2_request` to send the payload and check the response. If the payload is reflected unencoded in an executable context (e.g., `<svg onload=...>` inside HTML body), this is sufficient evidence to confirm the XSS.
 
 If confirmed, create finding with:
 - Vulnerable parameter
 - Reflection context
 - Working payload
 - XSS type (Reflected, Stored, DOM)
-- Evidence (screenshot, response showing injection)
+- Evidence (the specific response line showing the injected payload)
 
 ## MCP Tools to Use
 
