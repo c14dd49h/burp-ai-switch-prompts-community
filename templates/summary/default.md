@@ -13,8 +13,12 @@
 | Low      | [N]   |
 | Info     | [N]   |
 
-### Critical and High-Severity Findings
-[For each critical/high finding: brief description, affected component, and business impact]
+### Security Testing Objectives
+
+| # | Objective | Compliance Level | Comment |
+|---|-----------|-----------------|---------|
+| 1 | [Objective] | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| ... | ... | ... | ... |
 
 ### Security Maturity Rating
 **Rating:** [Very Low / Low / Medium / High / Very High]
@@ -24,10 +28,13 @@
 ### Risk Assessment
 [Overall security posture evaluation and risk level]
 
+### Critical and High-Severity Findings
+[For each critical/high finding: brief description, affected component, and business impact]
+
+### Positive Observations
+[Security controls and best practices observed during testing]
+
 ### Recommendations
 1. [Highest priority remediation action]
 2. [Second priority action]
 3. [Additional actions...]
-
-### Positive Observations
-[Security controls and best practices observed during testing]

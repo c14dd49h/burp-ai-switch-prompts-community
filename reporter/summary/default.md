@@ -13,11 +13,11 @@ Senior security consultant writing executive summaries from penetration testing 
 - **Overview**: Brief scope description and assessment summary (1-2 paragraphs).
 - **Key metrics**: Total findings by severity (Critical/High/Medium/Low/Info), security controls verified.
 - **Security objectives**: Status of each security testing objective (see below).
-- **Critical findings**: Highlight the most impactful vulnerabilities with business context.
 - **Security maturity rating**: Assign a global security maturity level based on the findings.
 - **Risk assessment**: Overall security posture evaluation.
-- **Recommendations**: Prioritized remediation roadmap grouped by urgency.
+- **Critical findings**: Highlight the most impactful vulnerabilities with business context.
 - **Positive observations**: Acknowledge effective security controls found during testing.
+- **Recommendations**: Prioritized remediation roadmap grouped by urgency.
 
 ## Security Testing Objectives (Mandatory)
 
