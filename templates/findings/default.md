@@ -6,6 +6,20 @@
 ### Severity
 [Critical/High/Medium/Low/Info]
 
+### CVSS v3.1
+[Vector string] — [Score] ([Rating])
+
+| Metric | Value | Justification |
+|--------|-------|---------------|
+| AV | [Value] | [Justification] |
+| AC | [Value] | [Justification] |
+| PR | [Value] | [Justification] |
+| UI | [Value] | [Justification] |
+| S  | [Value] | [Justification] |
+| C  | [Value] | [Justification] |
+| I  | [Value] | [Justification] |
+| A  | [Value] | [Justification] |
+
 ### Description
 [Detailed description of the vulnerability]
 
