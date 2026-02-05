@@ -229,7 +229,6 @@ If confirmed, create finding with:
 - Reflection context
 - Working payload
 - XSS type (Reflected, Stored, DOM)
-- Evidence: use the **actual request and response** from your test (not generic examples). Include all security-relevant headers (Set-Cookie, CSP, X-Frame-Options, etc.) and the response body excerpt showing the payload reflection. Do NOT fabricate or simplify request/response data.
 
 ## MCP Tools to Use
 
