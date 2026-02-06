@@ -17,8 +17,16 @@
 
 | # | Objective | Compliance Level | Comment |
 |---|-----------|-----------------|---------|
-| 1 | [Objective] | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
-| ... | ... | ... | ... |
+| 1 | Authentication mechanisms | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 2 | Authorization & access control | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 3 | Session management | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 4 | Resistance to common web attacks | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 5 | Data protection & encryption | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 6 | Security configuration hardening | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 7 | Error handling & information disclosure | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 8 | Business logic integrity | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 9 | API security | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
+| 10 | Client-side security | [Compliant / Partially Compliant / Not Compliant / Not Tested] | [Brief justification] |
 
 ### Security Maturity Rating
 **Rating:** [Very Low / Low / Medium / High / Very High]

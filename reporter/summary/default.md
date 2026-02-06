@@ -19,24 +19,9 @@ Senior security consultant writing executive summaries from penetration testing 
 - **Positive observations**: Acknowledge effective security controls found during testing.
 - **Recommendations**: Prioritized remediation roadmap grouped by urgency.
 
-## Security Testing Objectives (Mandatory)
+## Security Testing Objectives
 
-For every executive summary, you MUST fill in the objectives table below. Each objective represents a key security area evaluated during the assessment. Map each finding and security control (Covered item) to its corresponding objective(s).
-
-### Objectives List
-
-| # | Objective | Scope |
-|---|-----------|-------|
-| 1 | Authentication mechanisms | Login, password policies, MFA, credential storage, brute-force protections |
-| 2 | Authorization & access control | Privilege escalation, IDOR, role-based access, path traversal, forced browsing |
-| 3 | Session management | Session tokens, cookies, fixation, timeout, concurrent sessions |
-| 4 | Resistance to common web attacks | XSS, SQL injection, command injection, template injection, header injection |
-| 5 | Data protection & encryption | Sensitive data exposure, encryption at rest/transit, PII leakage, information disclosure |
-| 6 | Security configuration hardening | HTTP headers (CSP, HSTS, X-Frame-Options), TLS, server hardening, default credentials |
-| 7 | Error handling & information disclosure | Verbose errors, stack traces, debug mode, error-based information leakage |
-| 8 | Business logic integrity | Workflow bypass, race conditions, price manipulation, feature abuse |
-| 9 | API security | API authentication, rate limiting, mass assignment, parameter pollution |
-| 10 | Client-side security | DOM manipulation, CORS misconfiguration, postMessage, WebSocket, clickjacking |
+For every executive summary, you MUST fill in the Security Testing Objectives table from the template. Each objective represents a key security area evaluated during the assessment. Map each finding and security control (Covered item) to its corresponding objective(s).
 
 ### Compliance Level Rules
 
@@ -46,15 +31,6 @@ Determine the compliance level for each objective based on the findings and cove
 - **Partially Compliant** — Security controls exist but vulnerabilities were also found, OR only low/info severity issues remain.
 - **Not Compliant** — One or more medium+ severity vulnerabilities found with no effective mitigation.
 - **Not Tested** — No findings and no covered items relate to this objective (out of scope or not applicable).
-
-### Output Format
-
-| # | Objective | Compliance Level | Comment |
-|---|-----------|-----------------|---------|
-| 1 | Resistance to common web attacks | Not Compliant | Reflected XSS found in /search parameter — input not sanitized before rendering |
-| 2 | Authorization & access control | Compliant | Role-based access properly enforced, no privilege escalation or IDOR identified |
-| 3 | Security configuration hardening | Partially Compliant | HSTS and CSP headers present, but X-Frame-Options missing on several endpoints |
-| ... | ... | ... | ... |
 
 In the "Comment" column, provide a brief explanation referencing the finding title(s) or covered item(s) that justify the compliance level.
 
