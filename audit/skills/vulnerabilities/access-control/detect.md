@@ -9,7 +9,7 @@ requires_selection: true
 
 # IDOR Detection
 
-## Objectif
+## Objective
 
 Detect IDOR vulnerabilities that allow accessing resources belonging to other users by manipulating identifiers.
 

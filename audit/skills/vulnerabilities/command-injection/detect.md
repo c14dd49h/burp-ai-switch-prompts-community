@@ -9,7 +9,7 @@ requires_selection: true
 
 # Command Injection Detection
 
-## Objectif
+## Objective
 
 Detect vulnerabilities that allow executing arbitrary system commands on the server.
 

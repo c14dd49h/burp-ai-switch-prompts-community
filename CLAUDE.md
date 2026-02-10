@@ -31,7 +31,7 @@ burp-ai-switch-prompts-community/
     ├── agent.md                <- Report orchestrator
     ├── finding/
     │   └── agent.md            <- Finding writer agent
-    └── summary/
+    └── exec-summary/
         └── agent.md            <- Executive summary agent
 ```
 
@@ -43,7 +43,7 @@ burp-ai-switch-prompts-community/
 | `audit/agent.md` | Security testing agent - methodical vulnerability research |
 | `report/agent.md` | Report orchestrator - coordinates finding + summary agents |
 | `report/finding/agent.md` | Writes professional finding descriptions |
-| `report/summary/agent.md` | Generates executive summaries |
+| `report/exec-summary/agent.md` | Generates executive summaries |
 
 ## Skills Hierarchy (3 Levels)
 
@@ -79,7 +79,7 @@ requires: findings        # Optional: needs existing findings
 
 # Title
 
-## Objectif
+## Objective
 [Goal of this agent/skill]
 
 ## Instructions / Test steps
@@ -91,7 +91,7 @@ requires: findings        # Optional: needs existing findings
 
 **Required sections:**
 1. `# Title` - Name of the agent/skill
-2. `## Objectif` or `## Instructions` - Clear goal description
+2. `## Objective` or `## Instructions` - Clear goal description
 3. Step-by-step methodology
 4. Tool references (for skills)
 

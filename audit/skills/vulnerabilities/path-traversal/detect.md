@@ -9,7 +9,7 @@ requires_selection: true
 
 # Path Traversal Detection
 
-## Objectif
+## Objective
 
 Detect vulnerabilities that allow accessing files outside the intended directory via `../` sequences.
 

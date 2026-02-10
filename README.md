@@ -21,7 +21,7 @@ burp-ai-switch-prompts-community/
     ├── agent.md                <- Report orchestrator
     ├── finding/
     │   └── agent.md            <- Finding writer
-    └── summary/
+    └── exec-summary/
         └── agent.md            <- Executive summary generator
 ```
 
@@ -94,7 +94,7 @@ requires_selection: true
 ---
 ```
 3. Include sections:
-   - **Objectif**: What the skill detects
+   - **Objective**: What the skill detects
    - **Test steps**: Numbered methodology
    - **Payloads**: Detection payloads
    - **Document the finding**: How to report

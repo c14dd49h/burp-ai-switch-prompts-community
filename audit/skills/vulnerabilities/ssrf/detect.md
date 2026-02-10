@@ -9,7 +9,7 @@ requires_selection: true
 
 # SSRF Detection
 
-## Objectif
+## Objective
 
 Detect SSRF vulnerabilities that allow forcing the server to make requests to internal or external resources.
 

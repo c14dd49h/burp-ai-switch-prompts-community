@@ -9,11 +9,11 @@ requires_selection: true
 
 # XSS Reflected Detection
 
-## Objectif
+## Objective
 
 Detect Cross-Site Scripting (XSS) reflected vulnerabilities where user input is returned in the response without proper sanitization.
 
-## Etapes de test
+## Test steps
 
 ### 1. Identify injection points
 

@@ -9,7 +9,7 @@ requires_selection: true
 
 # SQL Injection UNION-based
 
-## Objectif
+## Objective
 
 Detect and exploit SQL injections allowing data extraction via the UNION SELECT technique.
 
