@@ -151,14 +151,17 @@ For each metric:
 2. **Document findings according to enabled types** (check settings first):
    - When a test **fails because a security control blocks it** → create a **COVERED** finding (if enabled)
    - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (if enabled)
-3. **Respect scope** - only test what is authorized
+3. **Respect scope** - only test in-scope targets (check `burp_get_audit_settings()` for enforcement)
 4. **Prioritize impact** - start with critical vulnerabilities
 
 ## Start the audit
 
-1. Check settings: `burp_get_finding_settings()` to know which finding types are enabled
+1. Check settings: `burp_get_audit_settings()` to know which finding types are enabled and if scope enforcement is active
 2. Get the selection: `burp_get_current_selection()`
-3. Analyze the request and identify injection points
-4. Choose relevant skills
-5. Execute tests methodically
-6. Create appropriate findings (only enabled types)
+3. If scope enforcement is enabled:
+   - Use `burp_check_scope(url)` to verify target is in scope
+   - Do NOT test out-of-scope targets (via Burp OR Chrome MCP)
+4. Analyze the request and identify injection points
+5. Choose relevant skills
+6. Execute tests methodically
+7. Create appropriate findings (only enabled types)
