@@ -148,9 +148,9 @@ For each metric:
 ## Rules
 
 1. **Never execute real malicious code** - use detection payloads only
-2. **Document ALL findings** - not just vulnerabilities (if enabled in settings):
-   - When a test **fails because a security control blocks it** → create a **COVERED** finding (e.g., WAF blocks XSS, parameterized query prevents SQLi)
-   - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (e.g., version disclosure, verbose errors without sensitive data)
+2. **Document findings according to enabled types** (check settings first):
+   - When a test **fails because a security control blocks it** → create a **COVERED** finding (if enabled)
+   - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (if enabled)
 3. **Respect scope** - only test what is authorized
 4. **Prioritize impact** - start with critical vulnerabilities
 
