@@ -102,16 +102,13 @@ UNION SELECT table_name,NULL FROM information_schema.tables--
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "SQL Injection (UNION-based) on [endpoint]",
-  type: "VULNERABILITY",
-  severity: "HIGH",
-  confidence: "CERTAIN",
-  category: "SQLi",
-  description: "SQL injection allowing data extraction...",
-  remediation: "Use prepared statements (parameterized queries)...",
-  references: ["CWE-89", "https://owasp.org/www-community/attacks/SQL_Injection"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "SQL Injection (UNION-based) on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-89"]
+   )
 ```
 
 ## Common bypasses

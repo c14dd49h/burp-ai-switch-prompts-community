@@ -105,16 +105,13 @@ http://127.0.0.1#@evil.com
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "SSRF on [endpoint]",
-  type: "VULNERABILITY",
-  severity: "HIGH",  -- CRITICAL if cloud metadata access
-  confidence: "CERTAIN",
-  category: "SSRF",
-  description: "Server makes requests to controlled URLs...",
-  remediation: "Validate URLs, domain whitelist, block private IPs...",
-  references: ["CWE-918", "https://owasp.org/www-community/attacks/Server_Side_Request_Forgery"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "SSRF on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-918"]
+   )
 ```
 
 ## Vulnerability indicators

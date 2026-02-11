@@ -109,16 +109,13 @@ $'\151\144'  -> id
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "Command Injection on [endpoint]",
-  type: "VULNERABILITY",
-  severity: "CRITICAL",
-  confidence: "CERTAIN",
-  category: "Command Injection",
-  description: "Arbitrary OS command execution...",
-  remediation: "Avoid system command calls, use APIs...",
-  references: ["CWE-78", "https://owasp.org/www-community/attacks/Command_Injection"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "Command Injection on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-78"]
+   )
 ```
 
 ## Vulnerability indicators

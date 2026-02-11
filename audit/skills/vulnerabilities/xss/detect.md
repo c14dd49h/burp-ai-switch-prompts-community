@@ -76,25 +76,20 @@ If reflected, note the context:
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "Reflected XSS on [endpoint]",
-  type: "VULNERABILITY",
-  severity: "MEDIUM",
-  confidence: "CERTAIN" or "FIRM",
-  category: "XSS",
-  description: "Detailed description...",
-  remediation: "Encode outputs, implement CSP...",
-  references: ["CWE-79", "https://owasp.org/www-community/xss-filter-evasion-cheatsheet"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "Reflected XSS on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-79"]
+   )
 ```
 
 If protected:
 ```
 burp_create_finding(
   title: "XSS Protection verified on [endpoint]",
-  type: "COVERED",
-  severity: "INFO",
-  category: "XSS",
+  severity: "COVERED",
   description: "Input sanitization and CSP in place..."
 )
 ```

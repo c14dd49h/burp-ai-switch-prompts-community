@@ -102,16 +102,13 @@ expect://id
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "Path Traversal on [endpoint]",
-  type: "VULNERABILITY",
-  severity: "HIGH",  -- CRITICAL if RCE possible
-  confidence: "CERTAIN",
-  category: "Path Traversal",
-  description: "Access to arbitrary files via directory traversal...",
-  remediation: "Validate paths, use whitelists, chroot...",
-  references: ["CWE-22", "https://owasp.org/www-community/attacks/Path_Traversal"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "Path Traversal on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-22"]
+   )
 ```
 
 ## Vulnerability indicators

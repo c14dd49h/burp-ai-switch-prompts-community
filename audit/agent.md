@@ -73,38 +73,59 @@ For each potential vulnerability:
 ### 4. Documentation
 ```
 If vulnerability confirmed:
+  1. burp_cvss_guide() → read the CVSS v3.1 spec definitions
+  2. Determine each metric value based on the spec
+  3. burp_cvss_calculate(...) → get the vector string
+  4. Create finding with CVSS:
+
   burp_create_finding(
-    type: "VULNERABILITY",
-    severity: <based on impact>,
-    confidence: <based on certainty>,
+    title: "Reflected XSS in search parameter",
+    cvss_vector: "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+    description: "...",
     include_selection: true
   )
+  # → severity is automatically derived from CVSS score
 
 If control verified:
   burp_create_finding(
-    type: "COVERED",
-    severity: "INFO",
+    title: "SQL Injection - parameterized queries in use",
+    severity: "COVERED",
+    description: "...",
     include_selection: true
   )
 ```
 
-## Severity levels
+## CVSS Scoring
 
-| Severity | Criteria |
-|----------|----------|
-| CRITICAL | RCE, Total auth bypass, Massive data breach |
-| HIGH | SQLi, Stored XSS, Internal SSRF, Privilege escalation |
-| MEDIUM | Reflected XSS, IDOR, Sensitive info disclosure |
-| LOW | Minor info disclosure, Clickjacking |
-| INFO | Best practices, Missing headers |
+1. `burp_cvss_guide()` → read the official CVSS v3.1 definitions
+2. For each metric, determine the value and justify your choice
+3. `burp_cvss_calculate(AV, AC, PR, UI, S, C, I, A)` → get the score and vector
 
-## Confidence levels
+The severity is derived automatically from the calculated score.
 
-| Confidence | Criteria |
-|------------|----------|
-| CERTAIN | Confirmed exploitation, irrefutable proof |
-| FIRM | Suspicious behavior, high probability |
-| TENTATIVE | Indication, requires investigation |
+### CVSS Justification Table
+
+Include this table in the finding description:
+
+```markdown
+## CVSS v3.1 Justification
+
+| Metric | Value | Spec Definition | Justification |
+|--------|-------|-----------------|---------------|
+| AV | Network | "The vulnerable component is bound to the network stack..." | Exploitable via HTTP request |
+| AC | Low | "Specialized access conditions do not exist..." | No special conditions required |
+| PR | None | "The attacker is unauthorized prior to attack..." | No authentication needed |
+| UI | Required | "Successful exploitation requires a user to take some action..." | Victim must click the malicious link |
+| S | Changed | "An exploited vulnerability can affect resources beyond..." | XSS executes in victim's browser context |
+| C | Low | "There is some loss of confidentiality..." | Session cookies accessible |
+| I | Low | "Modification of data is possible, but limited..." | DOM manipulation possible |
+| A | None | "There is no impact on availability..." | No denial of service |
+```
+
+For each metric:
+- **Value**: The code you selected (N/A/L/P, L/H, etc.)
+- **Spec Definition**: Key excerpt from `burp_cvss_guide()` that applies
+- **Justification**: Why this value applies to THIS specific vulnerability
 
 ## Rules
 

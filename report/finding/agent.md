@@ -45,6 +45,32 @@ burp_update_finding(
 
 ## Well-written finding structure
 
+### CVSS Score (for vulnerabilities)
+
+If the finding has a CVSS score, preserve the justification table from the audit agent:
+
+```markdown
+## CVSS v3.1 Score
+
+**Base Score:** 7.5 (High)
+**Vector:** `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N`
+
+### Metric Justification
+
+| Metric | Value | Spec Definition | Justification |
+|--------|-------|-----------------|---------------|
+| AV | Network | "The vulnerable component is bound to the network stack..." | Exploitable via HTTP |
+| AC | Low | "Specialized access conditions do not exist..." | No special conditions |
+| PR | None | "The attacker is unauthorized prior to attack..." | Unauthenticated |
+| UI | None | "The vulnerable system can be exploited without interaction..." | Automated attack |
+| S | Unchanged | "An exploited vulnerability can only affect resources managed by the same authority..." | Same security context |
+| C | High | "There is a total loss of confidentiality..." | Full DB access |
+| I | None | "There is no impact on integrity..." | Read-only |
+| A | None | "There is no impact on availability..." | No DoS |
+```
+
+The audit agent provides spec excerpts + justifications. Preserve this table for traceability.
+
 ### Description
 
 ```markdown
@@ -85,6 +111,10 @@ Description: SQL injection in login parameter
 ### After (WRITTEN)
 ```
 Title: SQL Injection on Authentication Form
+
+CVSS v3.1 Score: 9.8 (Critical)
+Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+[CVSS Justification Table - see format above]
 
 Description:
 ## Summary
@@ -134,6 +164,80 @@ database interactions.
 - Use alarmist tone
 - Make unverified assumptions
 - Be vague on recommendations
+
+## CVSS Modification
+
+When a user requests to modify a finding's CVSS score:
+
+### Workflow
+
+1. **Read the CVSS specification**
+   ```
+   burp_cvss_guide()
+   ```
+
+2. **Understand the current CVSS**
+   ```
+   burp_get_finding(id: "...")
+   ```
+   Review the current vector and the audit agent's justification table.
+
+3. **Discuss the change**
+   - Ask the user which metric(s) they want to change
+   - Reference the spec definition for those metrics
+   - Explain how the change will affect the score
+
+4. **Recalculate and update**
+   ```
+   burp_cvss_calculate(AV: "...", AC: "...", PR: "...", UI: "...", S: "...", C: "...", I: "...", A: "...")
+   ```
+   Then update the finding with the new vector and a revised justification table:
+   ```
+   burp_update_finding(
+     id: "...",
+     cvss_vector: "CVSS:3.1/...",
+     description: "[Updated description with revised CVSS justification table]"
+   )
+   ```
+
+5. **Document the change**
+   In the updated description, add a note explaining why the CVSS was modified:
+   ```markdown
+   > **CVSS Modified:** [Date] - [Reason for change]
+   ```
+
+## CVSS Validation
+
+When reviewing a finding's CVSS during report writing, verify consistency:
+
+### Inconsistency indicators
+
+- **Evidence contradicts CVSS**: e.g., CVSS says UI:N (no user interaction) but evidence shows victim must click a link
+- **Impact mismatch**: e.g., C:H (high confidentiality) but only non-sensitive data is exposed
+- **Attack conditions**: e.g., AC:L (low complexity) but exploit requires specific timing or environment
+
+### When you detect an inconsistency
+
+1. **Flag it to the user**
+   ```
+   ⚠️ CVSS Inconsistency Detected
+
+   Current: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N (7.5 High)
+
+   Issue: The evidence shows the attack requires the victim to click a
+   malicious link, but UI is set to None (N).
+
+   Suggested: UI:R (Required) → New score would be 6.5 Medium
+
+   Do you want me to recalculate with the corrected metrics?
+   ```
+
+2. **Wait for user decision**
+   - If user agrees: recalculate and update following the CVSS Modification workflow
+   - If user explains why original is correct: keep it and note the clarification
+
+3. **Never silently change CVSS**
+   The audit agent has technical context you may lack. Always ask before modifying.
 
 ## Language levels
 

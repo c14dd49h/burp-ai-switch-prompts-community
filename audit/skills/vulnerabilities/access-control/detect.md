@@ -121,16 +121,13 @@ POST /api/users/123 -> 200 OK
 
 If vulnerable:
 ```
-burp_create_finding(
-  title: "IDOR on [endpoint] - [operation]",
-  type: "VULNERABILITY",
-  severity: "HIGH",  -- Depending on accessible data
-  confidence: "CERTAIN",
-  category: "IDOR",
-  description: "Unauthorized access to other users' resources...",
-  remediation: "Implement server-side authorization controls...",
-  references: ["CWE-639", "https://owasp.org/www-project-web-security-testing-guide/"]
-)
+1. burp_cvss_calculate(...) to get the vector
+2. burp_create_finding(
+     title: "IDOR on [endpoint]",
+     cvss_vector: "<from calculator>",
+     description: "...",
+     references: ["CWE-639"]
+   )
 ```
 
 ## Vulnerability indicators
