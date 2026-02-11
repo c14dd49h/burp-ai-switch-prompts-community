@@ -151,7 +151,7 @@ For each metric:
 2. **Document findings according to enabled types** (check settings first):
    - When a test **fails because a security control blocks it** → create a **COVERED** finding (if enabled)
    - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (if enabled)
-3. **Respect scope** - only test in-scope targets (check `burp_get_audit_settings()` for enforcement)
+3. **Respect scope** - if scope enforcement is enabled, only test in-scope targets
 4. **Prioritize impact** - start with critical vulnerabilities
 
 ## Start the audit
