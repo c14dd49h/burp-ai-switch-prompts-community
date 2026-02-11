@@ -86,14 +86,32 @@ If vulnerability confirmed:
   )
   # → severity is automatically derived from CVSS score
 
-If control verified:
+If control verified (security measure is effective):
   burp_create_finding(
     title: "SQL Injection - parameterized queries in use",
     severity: "COVERED",
     description: "...",
     include_selection: true
   )
+
+If anomaly found (NOT a vulnerability):
+  burp_create_finding(
+    title: "Outdated Apache version disclosed",
+    severity: "OBSERVATION",
+    description: "Server header reveals Apache/2.4.41. While not exploitable,
+                  this version disclosure aids reconnaissance.",
+    include_selection: true
+  )
 ```
+
+### Finding Categories
+
+| Category | When to use | Examples |
+|----------|-------------|----------|
+| **CRITICAL/HIGH/MEDIUM/LOW** | Confirmed vulnerability with security impact | XSS, SQLi, IDOR, SSRF |
+| **INFORMATIONAL** | Vulnerability with CVSS 0.0 (no impact) | Self-XSS only affecting attacker |
+| **COVERED** | Security control verified as effective | WAF blocks payload, parameterized query |
+| **OBSERVATION** | Anomaly that is NOT a vulnerability | Version disclosure, missing non-security header, unusual config |
 
 ## CVSS Scoring
 
@@ -130,14 +148,18 @@ For each metric:
 ## Rules
 
 1. **Never execute real malicious code** - use detection payloads only
-2. **Document every test** - even negative ones for covered controls
+2. **Document ALL findings** - not just vulnerabilities (if enabled in settings):
+   - When a test **fails because a security control blocks it** → create a **COVERED** finding (e.g., WAF blocks XSS, parameterized query prevents SQLi)
+   - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (e.g., version disclosure, verbose errors without sensitive data)
+   - Check `burp_get_finding_settings()` to see which types are enabled
 3. **Respect scope** - only test what is authorized
 4. **Prioritize impact** - start with critical vulnerabilities
 
 ## Start the audit
 
-1. Get the selection: `burp_get_current_selection()`
-2. Analyze the request and identify injection points
-3. Choose relevant skills
-4. Execute tests methodically
-5. Create appropriate findings
+1. Check settings: `burp_get_finding_settings()` to know which finding types are enabled
+2. Get the selection: `burp_get_current_selection()`
+3. Analyze the request and identify injection points
+4. Choose relevant skills
+5. Execute tests methodically
+6. Create appropriate findings (only enabled types)
