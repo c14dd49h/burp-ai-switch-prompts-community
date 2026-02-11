@@ -16,17 +16,38 @@ This is a **prompt-only repository** for the [Burp AI Switch](https://github.com
 ```
 burp-ai-switch-prompts-community/
 ├── agent.md                    <- MASTER AGENT (entry point)
+├── taxonomy.yaml               <- SOURCE OF TRUTH (vuln/obs types, CWE, OWASP)
 ├── audit/
 │   ├── agent.md                <- Sub-agent for security auditing
 │   └── skills/
-│       └── vulnerabilities/    <- TYPE level
-│           ├── xss/            <- CATEGORY level
-│           │   └── detect.md   <- ACTION level
-│           ├── sql-injection/
-│           ├── ssrf/
-│           ├── access-control/
-│           ├── path-traversal/
-│           └── command-injection/
+│       ├── vulnerabilities/    <- TYPE level (18 skills)
+│       │   ├── xss/detect.md
+│       │   ├── sql-injection/detect.md
+│       │   ├── ssrf/detect.md
+│       │   ├── access-control/detect.md
+│       │   ├── path-traversal/detect.md
+│       │   ├── command-injection/detect.md
+│       │   ├── csrf/detect.md
+│       │   ├── xxe/detect.md
+│       │   ├── jwt/detect.md
+│       │   ├── ssti/detect.md
+│       │   ├── cors/detect.md
+│       │   ├── crlf/detect.md
+│       │   ├── request-smuggling/detect.md
+│       │   ├── deserialization/detect.md
+│       │   ├── nosql-injection/detect.md
+│       │   ├── file-upload/detect.md
+│       │   ├── open-redirect/detect.md
+│       │   └── oauth/detect.md
+│       └── observations/       <- TYPE level (8 skills)
+│           ├── version-disclosure/detect.md
+│           ├── missing-security-header/detect.md
+│           ├── verbose-error/detect.md
+│           ├── debug-mode/detect.md
+│           ├── directory-listing/detect.md
+│           ├── sensitive-data-exposure/detect.md
+│           ├── insecure-cookie/detect.md
+│           └── cors-misconfiguration/detect.md
 └── report/
     ├── agent.md                <- Report orchestrator
     ├── finding/
@@ -49,51 +70,91 @@ burp-ai-switch-prompts-community/
 
 ```
 skills/
-├── TYPE/           # Level 1: recon, analysis, vulnerabilities, payloads
-│   └── CATEGORY/   # Level 2: xss, sql-injection, ssrf, jwt...
+├── TYPE/           # Level 1: vulnerabilities, observations
+│   └── CATEGORY/   # Level 2: xss, sql-injection, version-disclosure...
 │       └── ACTION.md # Level 3: detect.md, bypass.md, exploit.md
 ```
 
-**Current skills:**
-- `vulnerabilities/xss/detect.md` - XSS detection
-- `vulnerabilities/sql-injection/detect.md` - SQL injection
-- `vulnerabilities/ssrf/detect.md` - SSRF
-- `vulnerabilities/access-control/detect.md` - IDOR
-- `vulnerabilities/path-traversal/detect.md` - Path traversal
-- `vulnerabilities/command-injection/detect.md` - Command injection
+**Vulnerability skills (18):**
+- `xss`, `sql-injection`, `ssrf`, `access-control`, `path-traversal`, `command-injection`
+- `csrf`, `xxe`, `jwt`, `ssti`, `cors`, `crlf`, `request-smuggling`
+- `deserialization`, `nosql-injection`, `file-upload`, `open-redirect`, `oauth`
+
+**Observation skills (8):**
+- `version-disclosure`, `missing-security-header`, `verbose-error`, `debug-mode`
+- `directory-listing`, `sensitive-data-exposure`, `insecure-cookie`, `cors-misconfiguration`
+
+## Taxonomy (Source of Truth)
+
+The `taxonomy.yaml` file is the single source of truth for vulnerability and observation types:
+
+```yaml
+# taxonomy.yaml
+vulnerabilities:
+  - id: xss
+    name: Cross-Site Scripting
+    description: Detect XSS vulnerabilities
+    cwe: CWE-79
+    owasp: A03:2021
+    references:
+      - https://owasp.org/xss
+    remediation_template: |
+      Encode output. Use CSP.
+
+observations:
+  - id: version-disclosure
+    name: Version Disclosure
+    description: Server version exposed in headers
+```
+
+**Metadata is derived from path:** `vulnerabilities/{id}/detect.md` → looks up `id` in taxonomy.yaml
 
 ## File Format
 
-All agents and skills use YAML frontmatter + Markdown:
+### Agents (with YAML frontmatter)
 
 ```markdown
 ---
-name: Skill Name
+name: Agent Name
 version: 1.0
 author: community
 description: What this does
-tags: [tag1, tag2]
-requires_selection: true  # Optional: needs selected request
-requires: findings        # Optional: needs existing findings
 ---
 
 # Title
 
 ## Objective
-[Goal of this agent/skill]
+[Goal of this agent]
 
-## Instructions / Test steps
-[Detailed methodology]
+## Workflow
+[Routing and delegation logic]
+```
+
+### Skills (pure Markdown, no frontmatter)
+
+Skills use pure markdown - metadata comes from taxonomy.yaml:
+
+```markdown
+# XSS Detection
+
+## Objective
+Detect Cross-Site Scripting vulnerabilities...
+
+## Instructions
+1. Identify injection points
+2. Test with payloads
+3. Document findings
 
 ## MCP Tools to use
-[List of Burp AI Switch tools]
+- `burp_get_current_selection`
+- `burp_create_finding`
 ```
 
 **Required sections:**
-1. `# Title` - Name of the agent/skill
+1. `# Title` - Name of the skill
 2. `## Objective` or `## Instructions` - Clear goal description
 3. Step-by-step methodology
-4. Tool references (for skills)
+4. Tool references
 
 ## MCP Tools Reference
 
@@ -127,11 +188,23 @@ These tools are available through Burp AI Switch:
 
 ### Adding a New Vulnerability Skill
 
-1. Create directory: `audit/skills/vulnerabilities/{vuln-type}/`
-2. Create file: `detect.md` (and optionally `bypass.md`, `exploit.md`)
-3. Follow the skill template with YAML frontmatter
+1. Add entry to `taxonomy.yaml`:
+   ```yaml
+   - id: new-vuln
+     name: New Vulnerability Type
+     description: Description for this vuln type
+     cwe: CWE-XXX
+     owasp: A0X:2021
+   ```
+2. Create directory: `audit/skills/vulnerabilities/{id}/`
+3. Create file: `detect.md` (pure markdown, no frontmatter)
 4. Include: Objective, Test steps, Payloads, Documentation guidance
-5. Reference CWE and OWASP
+
+### Adding a New Observation Skill
+
+1. Add entry to `taxonomy.yaml` under `observations:`
+2. Create directory: `audit/skills/observations/{id}/`
+3. Create file: `detect.md` (pure markdown)
 
 ### Modifying an Agent
 
@@ -140,11 +213,16 @@ These tools are available through Burp AI Switch:
 3. Maintain the workflow/routing tables
 4. Test with Burp AI Switch
 
-### Adding a New Category
+### Adding to Taxonomy
 
-1. Create directory: `audit/skills/TYPE/NEW-CATEGORY/`
-2. Add at least `detect.md`
-3. Update `audit/agent.md` skills table if needed
+Edit `taxonomy.yaml` to add new types. Fields:
+- `id` (required): Unique identifier matching directory name
+- `name` (required): Display name
+- `description` (required): Short description
+- `cwe`: CWE reference
+- `owasp`: OWASP Top 10 reference
+- `references`: List of URLs
+- `remediation_template`: Multi-line remediation guidance
 
 ## Quality Guidelines
 
@@ -166,8 +244,16 @@ These tools are available through Burp AI Switch:
 
 | Type | Usage |
 |------|-------|
-| `VULNERABILITY` | Confirmed security flaw |
+| `VULNERABILITY` | Confirmed security flaw (CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL) |
 | `COVERED` | Security control verified as working |
+| `OBSERVATION` | Informational note (not a vulnerability, not a control) |
+
+### vuln_type Parameter
+
+Always specify `vuln_type` when creating findings:
+- Matches taxonomy IDs: `xss`, `sql-injection`, `version-disclosure`, etc.
+- Enables deduplication by host+type
+- Provides CWE/OWASP references automatically
 
 ## Finding Status Flow
 

@@ -80,6 +80,7 @@ If vulnerability confirmed:
 
   burp_create_finding(
     title: "Reflected XSS in search parameter",
+    vuln_type: "xss",
     cvss_vector: "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
     description: "...",
     include_selection: true
@@ -90,6 +91,7 @@ If control verified (security measure is effective):
   burp_create_finding(
     title: "SQL Injection - parameterized queries in use",
     severity: "COVERED",
+    vuln_type: "sql-injection",  # REQUIRED for COVERED
     description: "...",
     include_selection: true
   )
@@ -98,6 +100,7 @@ If anomaly found (NOT a vulnerability):
   burp_create_finding(
     title: "Outdated Apache version disclosed",
     severity: "OBSERVATION",
+    vuln_type: "version-disclosure",  # REQUIRED for OBSERVATION
     description: "Server header reveals Apache/2.4.41. While not exploitable,
                   this version disclosure aids reconnaissance.",
     include_selection: true
@@ -112,6 +115,54 @@ If anomaly found (NOT a vulnerability):
 | **INFORMATIONAL** | Vulnerability with CVSS 0.0 (no impact) | Self-XSS only affecting attacker |
 | **COVERED** | Security control verified as effective | WAF blocks payload, parameterized query |
 | **OBSERVATION** | Anomaly that is NOT a vulnerability | Version disclosure, missing non-security header, unusual config |
+
+### Vulnerability Types (vuln_type)
+
+Use the `vuln_type` parameter to categorize findings. Values come from `taxonomy.yaml`:
+
+**Vulnerabilities:**
+| Type ID | Name | CWE |
+|---------|------|-----|
+| `xss` | Cross-Site Scripting | CWE-79 |
+| `sql-injection` | SQL Injection | CWE-89 |
+| `ssrf` | Server-Side Request Forgery | CWE-918 |
+| `idor` | Insecure Direct Object Reference | CWE-639 |
+| `path-traversal` | Path Traversal | CWE-22 |
+| `command-injection` | Command Injection | CWE-78 |
+| `xxe` | XML External Entity | CWE-611 |
+| `csrf` | Cross-Site Request Forgery | CWE-352 |
+| `open-redirect` | Open Redirect | CWE-601 |
+| `authentication-bypass` | Authentication Bypass | CWE-287 |
+| `broken-access-control` | Broken Access Control | CWE-284 |
+
+**Observations:**
+| Type ID | Name |
+|---------|------|
+| `version-disclosure` | Version Disclosure |
+| `missing-security-header` | Missing Security Header |
+| `verbose-error` | Verbose Error Message |
+| `debug-mode` | Debug Mode Enabled |
+| `directory-listing` | Directory Listing |
+| `sensitive-data-exposure` | Sensitive Data Exposure |
+| `insecure-cookie` | Insecure Cookie Configuration |
+| `cors-misconfiguration` | CORS Misconfiguration |
+
+### Deduplication Rules
+
+**COVERED and OBSERVATION findings are deduplicated per host + vuln_type:**
+
+- One COVERED finding per host + vulnerability type is sufficient
+- One OBSERVATION per host + observation type is sufficient
+- The tool will **reject** creation if:
+  - A COVERED already exists for the same host + type
+  - An OBSERVATION already exists for the same host + type
+  - A vulnerability of the same type exists on the host (cannot create COVERED)
+
+**Example:**
+- XSS found on `example.com/search` → vulnerability created
+- Try to create COVERED for XSS on `example.com` → **rejected** (vuln exists)
+- SQLi blocked on `example.com/login` → COVERED created for `sql-injection`
+- SQLi blocked on `example.com/admin` → **rejected** (COVERED already exists for host+type)
 
 ## CVSS Scoring
 

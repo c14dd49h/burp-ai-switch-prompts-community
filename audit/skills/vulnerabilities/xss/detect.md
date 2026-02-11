@@ -1,13 +1,4 @@
----
-name: XSS Reflected Detection
-version: 1.0
-author: community
-description: Detect reflected XSS vulnerabilities
-tags: [xss, injection, owasp-a03, client-side]
-requires_selection: true
----
-
-# XSS Reflected Detection
+# XSS Detection
 
 ## Objective
 

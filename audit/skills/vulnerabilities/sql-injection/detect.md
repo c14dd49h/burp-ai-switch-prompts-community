@@ -1,13 +1,4 @@
----
-name: SQL Injection UNION-based
-version: 1.0
-author: community
-description: Detect SQL injection using UNION technique
-tags: [sqli, injection, owasp-a03, database]
-requires_selection: true
----
-
-# SQL Injection UNION-based
+# SQL Injection Detection
 
 ## Objective
 

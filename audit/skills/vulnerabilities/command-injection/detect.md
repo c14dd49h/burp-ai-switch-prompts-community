@@ -1,12 +1,3 @@
----
-name: Command Injection Detection
-version: 1.0
-author: community
-description: Detect OS command injection vulnerabilities
-tags: [command-injection, rce, owasp-a03, os]
-requires_selection: true
----
-
 # Command Injection Detection
 
 ## Objective

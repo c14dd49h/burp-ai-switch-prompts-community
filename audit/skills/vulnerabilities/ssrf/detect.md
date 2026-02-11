@@ -1,12 +1,3 @@
----
-name: SSRF Detection
-version: 1.0
-author: community
-description: Detect Server-Side Request Forgery vulnerabilities
-tags: [ssrf, owasp-a10, server-side]
-requires_selection: true
----
-
 # SSRF Detection
 
 ## Objective

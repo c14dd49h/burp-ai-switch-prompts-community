@@ -1,12 +1,3 @@
----
-name: IDOR Detection
-version: 1.0
-author: community
-description: Detect Insecure Direct Object Reference vulnerabilities
-tags: [idor, access-control, owasp-a01, authorization]
-requires_selection: true
----
-
 # IDOR Detection
 
 ## Objective

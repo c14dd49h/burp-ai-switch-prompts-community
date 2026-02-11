@@ -9,6 +9,7 @@ This repository contains agents and skills that guide AI behavior during securit
 ```
 burp-ai-switch-prompts-community/
 ├── agent.md                    <- Master agent (entry point)
+├── taxonomy.yaml               <- Vulnerability/observation types (source of truth)
 ├── audit/
 │   ├── agent.md                <- Security audit agent
 │   └── skills/
@@ -124,6 +125,29 @@ tags: [tag1, tag2]
 Content here...
 ```
 
+## Taxonomy
+
+The `taxonomy.yaml` file defines standard vulnerability and observation types used across all skills:
+
+**Vulnerabilities:**
+| ID | Name | CWE |
+|----|------|-----|
+| `xss` | Cross-Site Scripting | CWE-79 |
+| `sql-injection` | SQL Injection | CWE-89 |
+| `ssrf` | Server-Side Request Forgery | CWE-918 |
+| `idor` | Insecure Direct Object Reference | CWE-639 |
+| `path-traversal` | Path Traversal | CWE-22 |
+| `command-injection` | Command Injection | CWE-78 |
+
+**Observations:**
+| ID | Name |
+|----|------|
+| `version-disclosure` | Version Disclosure |
+| `missing-security-header` | Missing Security Header |
+| `verbose-error` | Verbose Error Message |
+
+Use these `vuln_type` values when creating findings for consistency.
+
 ## MCP Tools Reference
 
 Skills can use these Burp AI Switch MCP tools:
@@ -133,14 +157,16 @@ Skills can use these Burp AI Switch MCP tools:
 - `burp_get_proxy_history` - Browse captured traffic
 - `burp_list_skills` - List available skills
 - `burp_list_findings` - List existing findings
+- `burp_check_scope` - Check if URL is in scope
+- `burp_get_audit_settings` - Get audit settings
 
 ### Active (Modify)
-- `burp_create_finding` - Create VULNERABILITY or COVERED finding
+- `burp_create_finding` - Create finding with `vuln_type` for categorization
 - `burp_update_finding` - Update finding status/content
 - `burp_export_findings` - Export to JSON/Markdown
 
 ### HTTP (Send requests)
-- `burp_http_request` - Send HTTP request through Burp
+- `burp_send_request` - Send HTTP request through Burp
 
 ## License
 

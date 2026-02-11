@@ -1,12 +1,3 @@
----
-name: Path Traversal Detection
-version: 1.0
-author: community
-description: Detect directory traversal vulnerabilities
-tags: [path-traversal, lfi, owasp-a01, file-access]
-requires_selection: true
----
-
 # Path Traversal Detection
 
 ## Objective
