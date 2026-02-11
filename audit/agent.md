@@ -151,7 +151,6 @@ For each metric:
 2. **Document ALL findings** - not just vulnerabilities (if enabled in settings):
    - When a test **fails because a security control blocks it** → create a **COVERED** finding (e.g., WAF blocks XSS, parameterized query prevents SQLi)
    - When you observe an **anomaly that is NOT exploitable** → create an **OBSERVATION** finding (e.g., version disclosure, verbose errors without sensitive data)
-   - Check `burp_get_finding_settings()` to see which types are enabled
 3. **Respect scope** - only test what is authorized
 4. **Prioritize impact** - start with critical vulnerabilities
 
