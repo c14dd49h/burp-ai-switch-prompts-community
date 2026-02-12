@@ -20,26 +20,31 @@ burp-ai-switch-prompts-community/
 ├── audit/
 │   ├── agent.md                <- Sub-agent for security auditing
 │   └── skills/
-│       ├── vulnerabilities/    <- TYPE level (18 skills)
-│       │   ├── xss/detect.md
-│       │   ├── sql-injection/detect.md
-│       │   ├── ssrf/detect.md
-│       │   ├── access-control/detect.md
-│       │   ├── path-traversal/detect.md
-│       │   ├── command-injection/detect.md
-│       │   ├── csrf/detect.md
-│       │   ├── xxe/detect.md
-│       │   ├── jwt/detect.md
-│       │   ├── ssti/detect.md
-│       │   ├── cors/detect.md
-│       │   ├── crlf/detect.md
-│       │   ├── request-smuggling/detect.md
-│       │   ├── deserialization/detect.md
-│       │   ├── nosql-injection/detect.md
-│       │   ├── file-upload/detect.md
-│       │   ├── open-redirect/detect.md
-│       │   └── oauth/detect.md
-│       └── observations/       <- TYPE level (8 skills)
+│       ├── vulnerabilities/
+│       │   ├── injection/              <- CATEGORY
+│       │   │   ├── xss/detect.md
+│       │   │   ├── sql/detect.md
+│       │   │   ├── nosql/detect.md
+│       │   │   ├── command/detect.md
+│       │   │   ├── ssti/detect.md
+│       │   │   └── crlf/detect.md
+│       │   ├── access-control/         <- CATEGORY
+│       │   │   ├── idor/detect.md
+│       │   │   └── authz-bypass/detect.md
+│       │   ├── authentication/         <- CATEGORY
+│       │   │   ├── jwt/detect.md
+│       │   │   └── oauth/detect.md
+│       │   └── [standalone]/           <- No category
+│       │       ├── ssrf/detect.md
+│       │       ├── path-traversal/detect.md
+│       │       ├── xxe/detect.md
+│       │       ├── csrf/detect.md
+│       │       ├── cors/detect.md
+│       │       ├── open-redirect/detect.md
+│       │       ├── request-smuggling/detect.md
+│       │       ├── deserialization/detect.md
+│       │       └── file-upload/detect.md
+│       └── observations/
 │           ├── version-disclosure/detect.md
 │           ├── missing-security-header/detect.md
 │           ├── verbose-error/detect.md
@@ -66,23 +71,37 @@ burp-ai-switch-prompts-community/
 | `report/finding/agent.md` | Writes professional finding descriptions |
 | `report/exec-summary/agent.md` | Generates executive summaries |
 
-## Skills Hierarchy (3 Levels)
+## Skills Hierarchy
+
+Skills are organized with optional categories:
 
 ```
 skills/
-├── TYPE/           # Level 1: vulnerabilities, observations
-│   └── CATEGORY/   # Level 2: xss, sql-injection, version-disclosure...
-│       └── ACTION.md # Level 3: detect.md, bypass.md, exploit.md
+├── vulnerabilities/
+│   ├── {category}/     # Optional grouping (injection, access-control, authentication)
+│   │   └── {id}/
+│   │       └── detect.md
+│   └── {id}/           # Standalone (no category)
+│       └── detect.md
+└── observations/
+    └── {id}/
+        └── detect.md
 ```
 
-**Vulnerability skills (18):**
-- `xss`, `sql-injection`, `ssrf`, `access-control`, `path-traversal`, `command-injection`
-- `csrf`, `xxe`, `jwt`, `ssti`, `cors`, `crlf`, `request-smuggling`
-- `deserialization`, `nosql-injection`, `file-upload`, `open-redirect`, `oauth`
+### Categorized Skills
 
-**Observation skills (8):**
-- `version-disclosure`, `missing-security-header`, `verbose-error`, `debug-mode`
-- `directory-listing`, `sensitive-data-exposure`, `insecure-cookie`, `cors-misconfiguration`
+| Category | Skills |
+|----------|--------|
+| `injection` | xss, sql, nosql, command, ssti, crlf |
+| `access-control` | idor, authz-bypass |
+| `authentication` | jwt, oauth |
+
+### Standalone Skills
+
+| Type | Skills |
+|------|--------|
+| Vulnerabilities | ssrf, path-traversal, xxe, csrf, cors, open-redirect, request-smuggling, deserialization, file-upload |
+| Observations | version-disclosure, missing-security-header, verbose-error, debug-mode, directory-listing, sensitive-data-exposure, insecure-cookie, cors-misconfiguration |
 
 ## Taxonomy (Source of Truth)
 
@@ -93,6 +112,7 @@ The `taxonomy.yaml` file is the single source of truth for vulnerability and obs
 vulnerabilities:
   - id: xss
     name: Cross-Site Scripting
+    category: injection         # NEW: optional category field
     description: Detect XSS vulnerabilities
     cwe: CWE-79
     owasp: A03:2021
@@ -107,7 +127,9 @@ observations:
     description: Server version exposed in headers
 ```
 
-**Metadata is derived from path:** `vulnerabilities/{id}/detect.md` → looks up `id` in taxonomy.yaml
+**Path derivation:**
+- `vulnerabilities/injection/xss/detect.md` → id: `xss`, category: `injection`
+- `vulnerabilities/ssrf/detect.md` → id: `ssrf`, category: `null`
 
 ## File Format
 
@@ -180,25 +202,39 @@ These tools are available through Burp AI Switch:
 
 ## Naming Conventions
 
-- **Directories**: lowercase with hyphens (`sql-injection`, not `SQLInjection`)
+- **Directories**: lowercase with hyphens (`access-control`, not `AccessControl`)
+- **Skill IDs**: short names (`sql`, not `sql-injection`)
 - **Skill files**: action-based naming (`detect.md`, `bypass.md`, `exploit.md`)
 - **Agent files**: always named `agent.md` in their directory
 
 ## Common Tasks
 
-### Adding a New Vulnerability Skill
+### Adding a New Categorized Vulnerability Skill
 
-1. Add entry to `taxonomy.yaml`:
+1. Add entry to `taxonomy.yaml` with `category` field:
    ```yaml
    - id: new-vuln
      name: New Vulnerability Type
+     category: injection       # or access-control, authentication
      description: Description for this vuln type
      cwe: CWE-XXX
      owasp: A0X:2021
    ```
-2. Create directory: `audit/skills/vulnerabilities/{id}/`
+2. Create directory: `audit/skills/vulnerabilities/{category}/{id}/`
 3. Create file: `detect.md` (pure markdown, no frontmatter)
 4. Include: Objective, Test steps, Payloads, Documentation guidance
+
+### Adding a New Standalone Vulnerability Skill
+
+1. Add entry to `taxonomy.yaml` WITHOUT `category` field:
+   ```yaml
+   - id: new-standalone
+     name: New Standalone Vuln
+     description: Description
+     cwe: CWE-XXX
+   ```
+2. Create directory: `audit/skills/vulnerabilities/{id}/`
+3. Create file: `detect.md`
 
 ### Adding a New Observation Skill
 
@@ -219,6 +255,7 @@ Edit `taxonomy.yaml` to add new types. Fields:
 - `id` (required): Unique identifier matching directory name
 - `name` (required): Display name
 - `description` (required): Short description
+- `category` (optional): Category for grouping (injection, access-control, authentication)
 - `cwe`: CWE reference
 - `owasp`: OWASP Top 10 reference
 - `references`: List of URLs
@@ -251,7 +288,7 @@ Edit `taxonomy.yaml` to add new types. Fields:
 ### vuln_type Parameter
 
 Always specify `vuln_type` when creating findings:
-- Matches taxonomy IDs: `xss`, `sql-injection`, `version-disclosure`, etc.
+- Matches taxonomy IDs: `xss`, `sql`, `idor`, `version-disclosure`, etc.
 - Enables deduplication by host+type
 - Provides CWE/OWASP references automatically
 

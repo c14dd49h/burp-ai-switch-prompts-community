@@ -115,9 +115,10 @@ If vulnerable:
 1. burp_cvss_calculate(...) to get the vector
 2. burp_create_finding(
      title: "IDOR on [endpoint]",
+     vuln_type: "idor",
      cvss_vector: "<from calculator>",
      description: "...",
-     references: ["CWE-639"]
+     include_selection: true
    )
 ```
 

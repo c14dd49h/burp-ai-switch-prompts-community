@@ -1,9 +1,18 @@
 # Taxonomy - Source of truth for vulnerability and observation types
 # Used by agents for consistent vuln_type values and report generation
+#
+# Structure mirrors skill folder hierarchy:
+#   vulnerabilities/{category}/{id}/detect.md  OR  vulnerabilities/{id}/detect.md
+#   observations/{category}/{id}/detect.md     OR  observations/{id}/detect.md
 
 vulnerabilities:
+  # ============================================
+  # INJECTION CATEGORY
+  # Path: vulnerabilities/injection/{id}/
+  # ============================================
   - id: xss
     name: Cross-Site Scripting
+    category: injection
     description: Detect reflected, stored, and DOM-based XSS vulnerabilities
     cwe: CWE-79
     owasp: A03:2021
@@ -15,8 +24,9 @@ vulnerabilities:
       Use Content-Security-Policy headers.
       Validate and sanitize user input.
 
-  - id: sql-injection
+  - id: sql
     name: SQL Injection
+    category: injection
     description: Detect SQL injection vulnerabilities in database queries
     cwe: CWE-89
     owasp: A03:2021
@@ -28,6 +38,135 @@ vulnerabilities:
       Apply least privilege to database accounts.
       Validate and sanitize user input.
 
+  - id: nosql
+    name: NoSQL Injection
+    category: injection
+    description: Detect NoSQL injection vulnerabilities in MongoDB, etc.
+    cwe: CWE-943
+    owasp: A03:2021
+    references:
+      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05.6-Testing_for_NoSQL_Injection
+    remediation_template: |
+      Use parameterized queries/sanitization libraries.
+      Disable server-side JavaScript execution.
+      Validate input types match expected types.
+      Implement least privilege database access.
+
+  - id: command
+    name: Command Injection
+    category: injection
+    description: Detect OS command injection vulnerabilities
+    cwe: CWE-78
+    owasp: A03:2021
+    references:
+      - https://owasp.org/www-community/attacks/Command_Injection
+      - https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+    remediation_template: |
+      Avoid system calls with user input when possible.
+      Use parameterized APIs instead of shell commands.
+      Validate input against strict allowlist.
+      Escape shell metacharacters if system calls are unavoidable.
+
+  - id: ssti
+    name: Server-Side Template Injection
+    category: injection
+    description: Detect SSTI vulnerabilities in template engines
+    cwe: CWE-1336
+    owasp: A03:2021
+    references:
+      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server-side_Template_Injection
+      - https://portswigger.net/web-security/server-side-template-injection
+    remediation_template: |
+      Avoid passing user input directly into templates.
+      Use logic-less templates when possible.
+      Implement strict input validation.
+      Sandbox template execution environment.
+
+  - id: crlf
+    name: CRLF Injection
+    category: injection
+    description: Detect CRLF injection vulnerabilities in HTTP headers
+    cwe: CWE-93
+    owasp: A03:2021
+    references:
+      - https://owasp.org/www-community/vulnerabilities/CRLF_Injection
+      - https://cwe.mitre.org/data/definitions/93.html
+    remediation_template: |
+      Sanitize user input before including in headers.
+      Reject or encode CR and LF characters.
+      Use framework methods that handle header encoding.
+
+  # ============================================
+  # ACCESS-CONTROL CATEGORY
+  # Path: vulnerabilities/access-control/{id}/
+  # ============================================
+  - id: idor
+    name: Insecure Direct Object Reference
+    category: access-control
+    description: Detect authorization flaws allowing access to other users' objects
+    cwe: CWE-639
+    owasp: A01:2021
+    references:
+      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References
+      - https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html
+    remediation_template: |
+      Implement proper authorization checks on every request.
+      Use indirect references (mapping tables) instead of direct IDs.
+      Validate user ownership before granting access.
+
+  - id: authz-bypass
+    name: Authorization Bypass
+    category: access-control
+    description: Detect authorization bypass vulnerabilities allowing unauthorized actions
+    cwe: CWE-284
+    owasp: A01:2021
+    references:
+      - https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+      - https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    remediation_template: |
+      Implement role-based access control (RBAC).
+      Deny by default, explicitly grant permissions.
+      Log and monitor access control failures.
+      Centralize authorization logic.
+
+  # ============================================
+  # AUTHENTICATION CATEGORY
+  # Path: vulnerabilities/authentication/{id}/
+  # ============================================
+  - id: jwt
+    name: JWT Vulnerability
+    category: authentication
+    description: Detect JWT security vulnerabilities including weak secrets and algorithm confusion
+    cwe: CWE-347
+    owasp: A02:2021
+    references:
+      - https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+      - https://portswigger.net/web-security/jwt
+    remediation_template: |
+      Use strong, unique secrets for signing.
+      Validate algorithm in token header.
+      Implement proper token expiration.
+      Use asymmetric algorithms (RS256) for public clients.
+
+  - id: oauth
+    name: OAuth Misconfiguration
+    category: authentication
+    description: Detect OAuth implementation vulnerabilities and misconfigurations
+    cwe: CWE-287
+    owasp: A07:2021
+    references:
+      - https://portswigger.net/web-security/oauth
+      - https://oauth.net/2/
+    remediation_template: |
+      Validate redirect_uri against strict allowlist.
+      Use state parameter for CSRF protection.
+      Implement PKCE for public clients.
+      Validate all token claims (iss, aud, exp).
+
+  # ============================================
+  # STANDALONE VULNERABILITIES
+  # Path: vulnerabilities/{id}/
+  # ============================================
   - id: ssrf
     name: Server-Side Request Forgery
     description: Detect SSRF vulnerabilities allowing server-side requests to arbitrary destinations
@@ -42,19 +181,6 @@ vulnerabilities:
       Disable unnecessary URL schemes (file://, gopher://, etc.).
       Implement network segmentation.
 
-  - id: idor
-    name: Insecure Direct Object Reference
-    description: Detect authorization flaws allowing access to other users' objects
-    cwe: CWE-639
-    owasp: A01:2021
-    references:
-      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References
-      - https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html
-    remediation_template: |
-      Implement proper authorization checks on every request.
-      Use indirect references (mapping tables) instead of direct IDs.
-      Validate user ownership before granting access.
-
   - id: path-traversal
     name: Path Traversal
     description: Detect directory traversal vulnerabilities allowing file system access
@@ -67,20 +193,6 @@ vulnerabilities:
       Validate user input against an allowlist of permitted values.
       Use a chroot jail or similar sandboxing.
       Canonicalize paths and validate they stay within allowed directories.
-
-  - id: command-injection
-    name: Command Injection
-    description: Detect OS command injection vulnerabilities
-    cwe: CWE-78
-    owasp: A03:2021
-    references:
-      - https://owasp.org/www-community/attacks/Command_Injection
-      - https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
-    remediation_template: |
-      Avoid system calls with user input when possible.
-      Use parameterized APIs instead of shell commands.
-      Validate input against strict allowlist.
-      Escape shell metacharacters if system calls are unavoidable.
 
   - id: xxe
     name: XML External Entity
@@ -120,87 +232,6 @@ vulnerabilities:
       Use allowlist of permitted redirect URLs.
       Use indirect references (mapping IDs to URLs).
 
-  - id: authentication-bypass
-    name: Authentication Bypass
-    description: Detect authentication bypass vulnerabilities
-    cwe: CWE-287
-    owasp: A07:2021
-    references:
-      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/
-      - https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
-    remediation_template: |
-      Implement proper authentication checks on all protected endpoints.
-      Use secure session management.
-      Enforce strong password policies.
-
-  - id: broken-access-control
-    name: Broken Access Control
-    description: Detect broken access control allowing unauthorized actions
-    cwe: CWE-284
-    owasp: A01:2021
-    references:
-      - https://owasp.org/Top10/A01_2021-Broken_Access_Control/
-      - https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
-    remediation_template: |
-      Implement role-based access control (RBAC).
-      Deny by default, explicitly grant permissions.
-      Log and monitor access control failures.
-
-  - id: ssti
-    name: Server-Side Template Injection
-    description: Detect SSTI vulnerabilities in template engines
-    cwe: CWE-1336
-    owasp: A03:2021
-    references:
-      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server-side_Template_Injection
-      - https://portswigger.net/web-security/server-side-template-injection
-    remediation_template: |
-      Avoid passing user input directly into templates.
-      Use logic-less templates when possible.
-      Implement strict input validation.
-      Sandbox template execution environment.
-
-  - id: jwt
-    name: JWT Vulnerability
-    description: Detect JWT security vulnerabilities including weak secrets and algorithm confusion
-    cwe: CWE-347
-    owasp: A02:2021
-    references:
-      - https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
-      - https://portswigger.net/web-security/jwt
-    remediation_template: |
-      Use strong, unique secrets for signing.
-      Validate algorithm in token header.
-      Implement proper token expiration.
-      Use asymmetric algorithms (RS256) for public clients.
-
-  - id: cors-vulnerability
-    name: CORS Vulnerability
-    description: Detect exploitable CORS misconfigurations
-    cwe: CWE-942
-    owasp: A05:2021
-    references:
-      - https://portswigger.net/web-security/cors
-      - https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
-    remediation_template: |
-      Validate Origin header against allowlist.
-      Avoid reflecting arbitrary origins.
-      Never combine wildcard with credentials.
-      Implement proper Vary: Origin header.
-
-  - id: crlf
-    name: CRLF Injection
-    description: Detect CRLF injection vulnerabilities in HTTP headers
-    cwe: CWE-93
-    owasp: A03:2021
-    references:
-      - https://owasp.org/www-community/vulnerabilities/CRLF_Injection
-      - https://cwe.mitre.org/data/definitions/93.html
-    remediation_template: |
-      Sanitize user input before including in headers.
-      Reject or encode CR and LF characters.
-      Use framework methods that handle header encoding.
-
   - id: request-smuggling
     name: HTTP Request Smuggling
     description: Detect HTTP request smuggling vulnerabilities
@@ -229,19 +260,6 @@ vulnerabilities:
       Implement integrity checks on serialized objects.
       Isolate deserialization in low-privilege environments.
 
-  - id: nosql-injection
-    name: NoSQL Injection
-    description: Detect NoSQL injection vulnerabilities in MongoDB, etc.
-    cwe: CWE-943
-    owasp: A03:2021
-    references:
-      - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05.6-Testing_for_NoSQL_Injection
-    remediation_template: |
-      Use parameterized queries/sanitization libraries.
-      Disable server-side JavaScript execution.
-      Validate input types match expected types.
-      Implement least privilege database access.
-
   - id: file-upload
     name: Unrestricted File Upload
     description: Detect unrestricted file upload vulnerabilities
@@ -257,19 +275,19 @@ vulnerabilities:
       Implement file size limits.
       Scan uploads for malware.
 
-  - id: oauth
-    name: OAuth Misconfiguration
-    description: Detect OAuth implementation vulnerabilities and misconfigurations
-    cwe: CWE-287
-    owasp: A07:2021
+  - id: cors
+    name: CORS Vulnerability
+    description: Detect exploitable CORS misconfigurations
+    cwe: CWE-942
+    owasp: A05:2021
     references:
-      - https://portswigger.net/web-security/oauth
-      - https://oauth.net/2/
+      - https://portswigger.net/web-security/cors
+      - https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
     remediation_template: |
-      Validate redirect_uri against strict allowlist.
-      Use state parameter for CSRF protection.
-      Implement PKCE for public clients.
-      Validate all token claims (iss, aud, exp).
+      Validate Origin header against allowlist.
+      Avoid reflecting arbitrary origins.
+      Never combine wildcard with credentials.
+      Implement proper Vary: Origin header.
 
 observations:
   - id: version-disclosure
