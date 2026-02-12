@@ -15,10 +15,9 @@ This is a **prompt-only repository** for the [Burp AI Switch](https://github.com
 
 ```
 burp-ai-switch-prompts-community/
-├── agent.md                    <- MASTER AGENT (entry point)
 ├── taxonomy.yaml               <- SOURCE OF TRUTH (vuln/obs types, CWE, OWASP)
 ├── audit/
-│   ├── agent.md                <- Sub-agent for security auditing
+│   ├── agent.md                <- Agent for security auditing (entry point)
 │   └── skills/
 │       ├── vulnerabilities/
 │       │   ├── injection/              <- CATEGORY
@@ -65,8 +64,8 @@ burp-ai-switch-prompts-community/
 
 | File | Purpose |
 |------|---------|
-| `agent.md` | Master agent - routes to sub-agents based on user intent |
-| `audit/agent.md` | Security testing agent - methodical vulnerability research |
+| `taxonomy.yaml` | Source of truth for vulnerability/observation types |
+| `audit/agent.md` | Security testing agent (entry point) - methodical vulnerability research |
 | `report/agent.md` | Report orchestrator - coordinates finding + summary agents |
 | `report/finding/agent.md` | Writes professional finding descriptions |
 | `report/exec-summary/agent.md` | Generates executive summaries |
@@ -185,8 +184,10 @@ These tools are available through Burp AI Switch:
 ### Passive (Read-only)
 - `burp_get_current_selection` - Get selected request/response
 - `burp_get_proxy_history` - Browse captured traffic
-- `burp_list_skills` - List available agents and skills
-- `burp_get_skill` - Load skill content
+- `burp_list_agents` - List available agents
+- `burp_get_agent` - Load an agent by ID
+- `burp_list_skills` - List available detection skills
+- `burp_get_skill` - Load a detection skill by path
 - `burp_list_findings` - List findings with filters
 - `burp_get_finding` - Get finding details
 
