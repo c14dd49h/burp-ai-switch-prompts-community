@@ -57,9 +57,13 @@ burp-ai-switch-prompts-community/
 └── report/
     ├── agent.md                <- Report orchestrator
     ├── finding/
-    │   └── agent.md            <- Finding writer agent
+    │   ├── agent.md            <- Finding writer agent
+    │   └── templates/          <- Finding templates (user-configurable)
+    │       └── default.md
     └── exec-summary/
-        └── agent.md            <- Executive summary agent
+        ├── agent.md            <- Executive summary agent
+        └── templates/
+            └── default.md
 ```
 
 ## Key Files
@@ -193,6 +197,7 @@ These tools are available through Burp AI Switch:
 - `burp_get_skill` - Load a detection skill by path
 - `burp_list_findings` - List findings with filters
 - `burp_get_finding` - Get finding details
+- `burp_get_finding_template` - Get configured finding template
 
 ### Active (Modify state)
 - `burp_create_finding` - Create VULNERABILITY or COVERED finding

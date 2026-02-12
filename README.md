@@ -21,9 +21,13 @@ burp-ai-switch-prompts-community/
 └── report/
     ├── agent.md                <- Report orchestrator
     ├── finding/
-    │   └── agent.md            <- Finding writer
+    │   ├── agent.md            <- Finding writer
+    │   └── templates/          <- Finding templates (configurable)
+    │       └── default.md
     └── exec-summary/
-        └── agent.md            <- Executive summary generator
+        ├── agent.md            <- Executive summary generator
+        └── templates/
+            └── default.md
 ```
 
 ## Installation
@@ -159,6 +163,7 @@ Skills can use these Burp AI Switch MCP tools:
 - `burp_list_findings` - List existing findings
 - `burp_check_scope` - Check if URL is in scope
 - `burp_get_audit_settings` - Get audit settings
+- `burp_get_finding_template` - Get configured finding template
 
 ### Active (Modify)
 - `burp_create_finding` - Create finding with `vuln_type` for categorization
