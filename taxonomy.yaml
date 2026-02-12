@@ -1,10 +1,43 @@
-# Taxonomy - Source of truth for vulnerability and observation types
+# Taxonomy - Source of truth for agents, skills, vulnerabilities and observations
 # Used by agents for consistent vuln_type values and report generation
 #
-# Structure mirrors skill folder hierarchy:
-#   vulnerabilities/{category}/{id}/detect.md  OR  vulnerabilities/{id}/detect.md
-#   observations/{category}/{id}/detect.md     OR  observations/{id}/detect.md
+# Structure:
+#   agents: orchestrator prompts (master + sub-agents)
+#   vulnerabilities: security testing skills with skill_path
+#   observations: informational findings with skill_path
 
+# ============================================
+# AGENTS
+# ============================================
+agents:
+  - id: master
+    name: Burp AI Switch Master Agent
+    description: Main orchestrator for security testing and reporting
+    path: agent.md
+
+  - id: audit
+    name: Security Audit Agent
+    description: Web application security testing expert
+    path: audit/agent.md
+
+  - id: report
+    name: Report Agent
+    description: Report generation orchestrator
+    path: report/agent.md
+
+  - id: finding-writer
+    name: Finding Writer Agent
+    description: Writes detailed finding descriptions
+    path: report/agents/finding-writer.md
+
+  - id: exec-summary
+    name: Executive Summary Agent
+    description: Writes executive summaries
+    path: report/agents/exec-summary.md
+
+# ============================================
+# VULNERABILITIES
+# ============================================
 vulnerabilities:
   # ============================================
   # INJECTION CATEGORY
@@ -16,6 +49,7 @@ vulnerabilities:
     description: Detect reflected, stored, and DOM-based XSS vulnerabilities
     cwe: CWE-79
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/xss/detect.md
     references:
       - https://owasp.org/www-community/attacks/xss/
       - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
@@ -30,6 +64,7 @@ vulnerabilities:
     description: Detect SQL injection vulnerabilities in database queries
     cwe: CWE-89
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/sql/detect.md
     references:
       - https://owasp.org/www-community/attacks/SQL_Injection
       - https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -44,6 +79,7 @@ vulnerabilities:
     description: Detect NoSQL injection vulnerabilities in MongoDB, etc.
     cwe: CWE-943
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/nosql/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05.6-Testing_for_NoSQL_Injection
     remediation_template: |
@@ -58,6 +94,7 @@ vulnerabilities:
     description: Detect OS command injection vulnerabilities
     cwe: CWE-78
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/command/detect.md
     references:
       - https://owasp.org/www-community/attacks/Command_Injection
       - https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
@@ -73,6 +110,7 @@ vulnerabilities:
     description: Detect SSTI vulnerabilities in template engines
     cwe: CWE-1336
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/ssti/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server-side_Template_Injection
       - https://portswigger.net/web-security/server-side-template-injection
@@ -88,6 +126,7 @@ vulnerabilities:
     description: Detect CRLF injection vulnerabilities in HTTP headers
     cwe: CWE-93
     owasp: A03:2021
+    skill_path: audit/skills/vulnerabilities/injection/crlf/detect.md
     references:
       - https://owasp.org/www-community/vulnerabilities/CRLF_Injection
       - https://cwe.mitre.org/data/definitions/93.html
@@ -106,6 +145,7 @@ vulnerabilities:
     description: Detect authorization flaws allowing access to other users' objects
     cwe: CWE-639
     owasp: A01:2021
+    skill_path: audit/skills/vulnerabilities/access-control/idor/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References
       - https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html
@@ -120,6 +160,7 @@ vulnerabilities:
     description: Detect authorization bypass vulnerabilities allowing unauthorized actions
     cwe: CWE-284
     owasp: A01:2021
+    skill_path: audit/skills/vulnerabilities/access-control/authz-bypass/detect.md
     references:
       - https://owasp.org/Top10/A01_2021-Broken_Access_Control/
       - https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
@@ -139,6 +180,7 @@ vulnerabilities:
     description: Detect JWT security vulnerabilities including weak secrets and algorithm confusion
     cwe: CWE-347
     owasp: A02:2021
+    skill_path: audit/skills/vulnerabilities/authentication/jwt/detect.md
     references:
       - https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
       - https://portswigger.net/web-security/jwt
@@ -154,6 +196,7 @@ vulnerabilities:
     description: Detect OAuth implementation vulnerabilities and misconfigurations
     cwe: CWE-287
     owasp: A07:2021
+    skill_path: audit/skills/vulnerabilities/authentication/oauth/detect.md
     references:
       - https://portswigger.net/web-security/oauth
       - https://oauth.net/2/
@@ -172,6 +215,7 @@ vulnerabilities:
     description: Detect SSRF vulnerabilities allowing server-side requests to arbitrary destinations
     cwe: CWE-918
     owasp: A10:2021
+    skill_path: audit/skills/vulnerabilities/ssrf/detect.md
     references:
       - https://owasp.org/www-community/attacks/Server_Side_Request_Forgery
       - https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
@@ -186,6 +230,7 @@ vulnerabilities:
     description: Detect directory traversal vulnerabilities allowing file system access
     cwe: CWE-22
     owasp: A01:2021
+    skill_path: audit/skills/vulnerabilities/path-traversal/detect.md
     references:
       - https://owasp.org/www-community/attacks/Path_Traversal
       - https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
@@ -199,6 +244,7 @@ vulnerabilities:
     description: Detect XXE vulnerabilities in XML parsers
     cwe: CWE-611
     owasp: A05:2021
+    skill_path: audit/skills/vulnerabilities/xxe/detect.md
     references:
       - https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing
       - https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html
@@ -212,6 +258,7 @@ vulnerabilities:
     description: Detect CSRF vulnerabilities in state-changing operations
     cwe: CWE-352
     owasp: A01:2021
+    skill_path: audit/skills/vulnerabilities/csrf/detect.md
     references:
       - https://owasp.org/www-community/attacks/csrf
       - https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
@@ -225,6 +272,7 @@ vulnerabilities:
     description: Detect open redirect vulnerabilities allowing URL manipulation
     cwe: CWE-601
     owasp: A01:2021
+    skill_path: audit/skills/vulnerabilities/open-redirect/detect.md
     references:
       - https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
     remediation_template: |
@@ -237,6 +285,7 @@ vulnerabilities:
     description: Detect HTTP request smuggling vulnerabilities
     cwe: CWE-444
     owasp: A04:2021
+    skill_path: audit/skills/vulnerabilities/request-smuggling/detect.md
     references:
       - https://portswigger.net/web-security/request-smuggling
       - https://cwe.mitre.org/data/definitions/444.html
@@ -251,6 +300,7 @@ vulnerabilities:
     description: Detect insecure deserialization vulnerabilities
     cwe: CWE-502
     owasp: A08:2021
+    skill_path: audit/skills/vulnerabilities/deserialization/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/16-Testing_for_HTTP_Incoming_Requests
       - https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
@@ -265,6 +315,7 @@ vulnerabilities:
     description: Detect unrestricted file upload vulnerabilities
     cwe: CWE-434
     owasp: A04:2021
+    skill_path: audit/skills/vulnerabilities/file-upload/detect.md
     references:
       - https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
       - https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
@@ -280,6 +331,7 @@ vulnerabilities:
     description: Detect exploitable CORS misconfigurations
     cwe: CWE-942
     owasp: A05:2021
+    skill_path: audit/skills/vulnerabilities/cors/detect.md
     references:
       - https://portswigger.net/web-security/cors
       - https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
@@ -289,16 +341,21 @@ vulnerabilities:
       Never combine wildcard with credentials.
       Implement proper Vary: Origin header.
 
+# ============================================
+# OBSERVATIONS
+# ============================================
 observations:
   - id: version-disclosure
     name: Version Disclosure
     description: Server or framework version exposed in headers or responses
+    skill_path: audit/skills/observations/version-disclosure/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server
 
   - id: missing-security-header
     name: Missing Security Header
     description: Recommended security headers not present
+    skill_path: audit/skills/observations/missing-security-header/detect.md
     references:
       - https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
       - https://owasp.org/www-project-secure-headers/
@@ -306,35 +363,41 @@ observations:
   - id: verbose-error
     name: Verbose Error Message
     description: Detailed error messages or stack traces exposed
+    skill_path: audit/skills/observations/verbose-error/detect.md
     references:
       - https://owasp.org/www-community/Improper_Error_Handling
 
   - id: debug-mode
     name: Debug Mode Enabled
     description: Application running in debug or development mode
+    skill_path: audit/skills/observations/debug-mode/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/
 
   - id: directory-listing
     name: Directory Listing
     description: Web server exposes directory contents
+    skill_path: audit/skills/observations/directory-listing/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/04-Review_Old_Backup_and_Unreferenced_Files_for_Sensitive_Information
 
   - id: sensitive-data-exposure
     name: Sensitive Data Exposure
     description: Sensitive information exposed in responses, logs, or error messages
+    skill_path: audit/skills/observations/sensitive-data-exposure/detect.md
     references:
       - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/05-Review_Webpage_Content_for_Information_Leakage
 
   - id: insecure-cookie
     name: Insecure Cookie Configuration
     description: Cookies missing security attributes (Secure, HttpOnly, SameSite)
+    skill_path: audit/skills/observations/insecure-cookie/detect.md
     references:
       - https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
 
   - id: cors-misconfiguration
     name: CORS Misconfiguration
     description: Overly permissive CORS policy (not exploitable but noteworthy)
+    skill_path: audit/skills/observations/cors-misconfiguration/detect.md
     references:
       - https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
