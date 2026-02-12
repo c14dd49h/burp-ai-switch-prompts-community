@@ -2,7 +2,7 @@
 # Used by agents for consistent vuln_type values and report generation
 #
 # Structure:
-#   agents: orchestrator prompts (master + sub-agents)
+#   agents: orchestrator prompts
 #   vulnerabilities: security testing skills with skill_path
 #   observations: informational findings with skill_path
 
@@ -10,11 +10,6 @@
 # AGENTS
 # ============================================
 agents:
-  - id: master
-    name: Burp AI Switch Master Agent
-    description: Main orchestrator for security testing and reporting
-    path: agent.md
-
   - id: audit
     name: Security Audit Agent
     description: Web application security testing expert
