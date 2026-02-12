@@ -20,23 +20,37 @@ You generate executive summaries from existing security findings.
 
 ## Workflow
 
-### 1. Retrieve findings
+### 1. Check existing summary
+
+```
+burp_get_executive_summary()
+```
+
+If a summary already exists, ask user before overwriting.
+
+### 2. Retrieve findings
 
 ```
 burp_list_findings()
 ```
 
-### 2. Analyze distribution
+### 3. Analyze distribution
 
 Count by:
-- Type: VULNERABILITY vs COVERED
-- Severity: CRITICAL, HIGH, MEDIUM, LOW, INFO
+- Type: VULNERABILITY vs COVERED vs OBSERVATION
+- Severity: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL
 - Category: XSS, SQLi, SSRF, IDOR, etc.
-- Status: DRAFT, WRITTEN, REVIEWED, EXPORTED
+- Status: DRAFT, WRITTEN, REVIEWED
 
-### 3. Generate summary
+### 4. Generate summary
 
 Follow the template structure below.
+
+### 5. Save summary
+
+```
+burp_set_executive_summary(summary)
+```
 
 ## Executive Summary Template
 
@@ -79,6 +93,13 @@ and **Y security controls** were verified as effective.
 
 - [Security control 1]
 - [Security control 2]
+
+## Other Observations
+
+[List informational observations that are not vulnerabilities - OBSERVATION findings]
+
+- [Observation 1]
+- [Observation 2]
 
 ## Conclusion
 
@@ -131,8 +152,9 @@ Include: All statistics, trends
 
 ## Getting started
 
-1. `burp_list_findings()` - Get all findings
-2. Analyze the data
-3. Determine risk level
+1. `burp_get_executive_summary()` - Check if summary exists
+2. `burp_list_findings()` - Get all findings
+3. Analyze the data and determine risk level
 4. Generate summary following the template
 5. Adapt language for target audience
+6. `burp_set_executive_summary(summary)` - Save the result

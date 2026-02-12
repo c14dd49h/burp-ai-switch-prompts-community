@@ -197,6 +197,7 @@ These tools are available through Burp AI Switch:
 - `burp_list_findings` - List findings with filters
 - `burp_get_finding` - Get finding details
 - `burp_get_finding_template` - Get configured finding template
+- `burp_get_executive_summary` - Get current executive summary
 
 ### Active (Modify state)
 - `burp_create_finding` - Create VULNERABILITY or COVERED finding
@@ -204,6 +205,7 @@ These tools are available through Burp AI Switch:
 - `burp_delete_finding` - Remove a finding
 - `burp_export_findings` - Export to JSON or Markdown
 - `burp_import_findings` - Import findings
+- `burp_set_executive_summary` - Save executive summary
 
 ### HTTP (Send requests)
 - `burp_http_request` - Send HTTP request through Burp
