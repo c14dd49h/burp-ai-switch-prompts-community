@@ -23,6 +23,7 @@ You help users create and improve detection skills for the Burp AI Switch extens
 Ask the user:
 - What vulnerability/observation type? (e.g., "GraphQL injection", "API key exposure")
 - Is it a **vulnerability** (exploitable) or **observation** (informational)?
+- What skill type? `detect` (default), `bypass`, or `exploit`
 - Does a similar skill already exist? → `burp_list_skills(query: "...")`
 
 ### 2. Check Taxonomy
@@ -36,10 +37,17 @@ If similar exists → suggest improvement instead of new skill.
 
 ### 3. Define Structure
 
+**Skill file types** (action-based naming):
+- `detect.md` - Detection methodology (required)
+- `bypass.md` - WAF/filter bypass techniques (optional)
+- `exploit.md` - Exploitation techniques (optional)
+
 **For vulnerabilities:**
 ```
-audit/skills/vulnerabilities/{category}/{id}/detect.md   # If categorized
-audit/skills/vulnerabilities/{id}/detect.md              # If standalone
+audit/skills/vulnerabilities/{category}/{id}/
+├── detect.md    # Detection (required)
+├── bypass.md    # Bypass techniques (optional)
+└── exploit.md   # Exploitation (optional)
 ```
 
 Categories: `injection`, `access-control`, `authentication` (or standalone)
@@ -155,7 +163,7 @@ Provide the modified skill content directly for the user to save.
 ### Naming Conventions
 
 - **IDs**: lowercase, hyphenated (e.g., `graphql-injection`)
-- **Skill files**: `detect.md`
+- **Skill files**: action-based (`detect.md`, `bypass.md`, `exploit.md`)
 - **Categories**: only if 3+ related skills exist
 
 ### What NOT to Include
