@@ -38,37 +38,32 @@ Senior pentester documenting security findings. Expert in OWASP Top 10, CVSS 3.1
 
 Preserve the audit agent's CVSS justification table. Use `spec_definitions` from `burp_cvss_calculate()` for the spec column.
 
-**Output format:**
+### Modifying CVSS (user request or inconsistency detected)
 
-| Metric | Value | FIRST Spec Definition | Justification |
-|--------|-------|----------------------|---------------|
-| AV | Network | "vulnerable component is bound to the network stack" | Endpoint exposed over HTTP |
-| ... | ... | ... | ... |
+1. `burp_cvss_guide()` → read metric definitions
+2. `burp_cvss_calculate(...)` → compute new score
+3. Present to user: current vs proposed, with justification
+4. If approved, add note: `> CVSS Modified: [reason]`
 
-### Modifying CVSS (user request only)
+Never change CVSS silently.
 
-1. `burp_cvss_guide()` → read definitions
-2. Discuss which metric(s) to change
-3. `burp_cvss_calculate(...)` → recalculate
-4. Add note: `> CVSS Modified: [reason]`
+## COVERED Findings
 
-### Inconsistency detected
+Positive coverage showing a security control is working - not a vulnerability.
 
-Flag to user, never silently change. Example:
-
-```
-⚠️ CVSS Inconsistency: UI set to None but exploit requires user click
-Suggested: UI:R → score changes from 7.5 to 6.5
-```
-
-## Security Controls (COVERED)
-
-Not a vulnerability - positive coverage showing protection works.
-
-- **No CVSS/Severity** - security controls don't have ratings
-- **Title**: What control was verified (e.g., "CSRF token validation")
+- **No CVSS** - use `severity: "COVERED"` directly
+- **Title**: What was verified (e.g., "CSRF token validation working")
 - **Description**: What was tested and why the control is effective
-- **Evidence**: HTTP request/response showing protection working
+- **Evidence**: HTTP request/response showing protection in action
+
+## OBSERVATION Findings
+
+Informational notes - anomalies that aren't exploitable vulnerabilities.
+
+- **No CVSS** - use `severity: "OBSERVATION"` directly
+- **Title**: What was observed (e.g., "Apache version disclosed in headers")
+- **Description**: What was found and potential implications
+- **vuln_type**: Use taxonomy IDs (version-disclosure, verbose-error, etc.)
 
 ## Writing Quality
 
