@@ -28,13 +28,19 @@ burp_get_executive_summary()
 
 If a summary already exists, ask user before overwriting.
 
-### 2. Retrieve findings
+### 2. Load template
+
+```
+burp_get_executive_summary_template()
+```
+
+### 3. Retrieve findings
 
 ```
 burp_list_findings()
 ```
 
-### 3. Analyze distribution
+### 4. Analyze distribution
 
 Count by:
 - Type: VULNERABILITY vs COVERED vs OBSERVATION
@@ -42,77 +48,14 @@ Count by:
 - Category: XSS, SQLi, SSRF, IDOR, etc.
 - Status: DRAFT, WRITTEN, REVIEWED
 
-### 4. Generate summary
+### 5. Generate summary
 
-Follow the template structure below.
+Fill the template with findings data.
 
-### 5. Save summary
+### 6. Save summary
 
 ```
 burp_set_executive_summary(summary)
-```
-
-## Executive Summary Template
-
-```markdown
-# Executive Summary
-
-## Overview
-
-During this security assessment, **X vulnerabilities** were identified
-and **Y security controls** were verified as effective.
-
-| Severity | Count |
-|----------|-------|
-| Critical | X     |
-| High     | X     |
-| Medium   | X     |
-| Low      | X     |
-| Info     | X     |
-
-## Security Maturity: [Very Low/Low/Medium/High/Very High]
-
-[2-3 sentences explaining the rating based on findings]
-
-## Security Testing Objectives
-
-| Objective | Compliance | Comment |
-|-----------|------------|---------|
-| Authentication | ... | ... |
-| Authorization | ... | ... |
-| Input Validation | ... | ... |
-| ... | ... | ... |
-
-## Critical Issues
-
-[List the most severe vulnerabilities that require immediate attention]
-
-1. **[Title]** - [Brief impact description]
-2. **[Title]** - [Brief impact description]
-
-## Key Recommendations
-
-1. **Immediate** (0-7 days): [Most urgent action]
-2. **Short-term** (1-4 weeks): [Important fixes]
-3. **Long-term** (1-3 months): [Architectural improvements]
-
-## Positive Observations
-
-[List verified security controls - COVERED findings]
-
-- [Security control 1]
-- [Security control 2]
-
-## Other Observations
-
-[List informational observations that are not vulnerabilities - OBSERVATION findings]
-
-- [Observation 1]
-- [Observation 2]
-
-## Conclusion
-
-[Final assessment and next steps recommendation]
 ```
 
 ## Security Maturity Rating
@@ -187,8 +130,9 @@ Include: All statistics, trends
 ## Getting started
 
 1. `burp_get_executive_summary()` - Check if summary exists
-2. `burp_list_findings()` - Get all findings
-3. Analyze the data and determine risk level
-4. Generate summary following the template
-5. Adapt language for target audience
-6. `burp_set_executive_summary(summary)` - Save the result
+2. `burp_get_executive_summary_template()` - Load template
+3. `burp_list_findings()` - Get all findings
+4. Analyze the data and determine maturity rating
+5. Fill the template with findings data
+6. Adapt language for target audience
+7. `burp_set_executive_summary(summary)` - Save the result

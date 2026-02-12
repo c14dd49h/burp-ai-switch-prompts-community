@@ -164,6 +164,7 @@ Skills can use these Burp AI Switch MCP tools:
 - `burp_get_audit_settings` - Get audit settings
 - `burp_get_finding_template` - Get configured finding template
 - `burp_get_executive_summary` - Get current executive summary
+- `burp_get_executive_summary_template` - Get configured executive summary template
 
 ### Active (Modify)
 - `burp_create_finding` - Create finding with `vuln_type` for categorization

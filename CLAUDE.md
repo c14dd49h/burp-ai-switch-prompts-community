@@ -198,6 +198,7 @@ These tools are available through Burp AI Switch:
 - `burp_get_finding` - Get finding details
 - `burp_get_finding_template` - Get configured finding template
 - `burp_get_executive_summary` - Get current executive summary
+- `burp_get_executive_summary_template` - Get configured executive summary template
 
 ### Active (Modify state)
 - `burp_create_finding` - Create VULNERABILITY or COVERED finding
