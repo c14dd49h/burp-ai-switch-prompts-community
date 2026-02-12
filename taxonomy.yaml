@@ -15,20 +15,15 @@ agents:
     description: Web application security testing expert
     path: audit/agent.md
 
-  - id: report
-    name: Report Agent
-    description: Report generation orchestrator
-    path: report/agent.md
-
   - id: finding-writer
     name: Finding Writer Agent
-    description: Writes detailed finding descriptions
-    path: report/agents/finding-writer.md
+    description: Writes detailed finding descriptions from DRAFT to WRITTEN
+    path: report/finding/agent.md
 
   - id: exec-summary
     name: Executive Summary Agent
-    description: Writes executive summaries
-    path: report/agents/exec-summary.md
+    description: Generates executive summaries from findings
+    path: report/exec-summary/agent.md
 
   - id: author
     name: Skill Author Agent

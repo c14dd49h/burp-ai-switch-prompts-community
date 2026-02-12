@@ -19,7 +19,6 @@ burp-ai-switch-prompts-community/
 │           ├── ssrf/
 │           └── ...
 └── report/
-    ├── agent.md                <- Report orchestrator
     ├── finding/
     │   ├── agent.md            <- Finding writer
     │   └── templates/          <- Finding templates (configurable)

@@ -55,7 +55,6 @@ burp-ai-switch-prompts-community/
 ├── author/
 │   └── agent.md                <- Agent for creating/improving skills
 └── report/
-    ├── agent.md                <- Report orchestrator
     ├── finding/
     │   ├── agent.md            <- Finding writer agent
     │   └── templates/          <- Finding templates (user-configurable)
