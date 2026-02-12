@@ -20,24 +20,34 @@ You are a security report writing expert. Your role is to transform raw findings
 
 ## Workflow
 
-### 1. Retrieve findings to write
+### 1. Load the user's finding template
+
+```
+burp_get_finding_template()
+```
+
+This returns the configured template. Use it as your structure guide for writing findings.
+
+### 2. Retrieve findings to write
 
 ```
 burp_list_findings(status: "DRAFT")
 ```
 
-### 2. For each DRAFT finding
+### 3. For each DRAFT finding
 
 ```
 burp_get_finding(id: "...")
 ```
 
-### 3. Write according to template
+### 4. Write according to template
+
+Follow the template structure from step 1. Adapt sections to the specific finding.
 
 ```
 burp_update_finding(
   id: "...",
-  description: "[New description]",
+  description: "[New description following template]",
   remediation: "[Recommendations]",
   status: "WRITTEN"
 )
@@ -258,6 +268,7 @@ and reputation damage.
 
 ## Getting started
 
-1. `burp_list_findings(status: "DRAFT")` - see findings to write
-2. For each finding, read and rewrite it
-3. Mark as WRITTEN when done
+1. `burp_get_finding_template()` - load the configured template
+2. `burp_list_findings(status: "DRAFT")` - see findings to write
+3. For each finding, read and rewrite following the template
+4. Mark as WRITTEN when done
