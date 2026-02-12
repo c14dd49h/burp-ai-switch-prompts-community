@@ -30,6 +30,11 @@ agents:
     description: Writes executive summaries
     path: report/agents/exec-summary.md
 
+  - id: author
+    name: Skill Author Agent
+    description: Helps create and improve detection skills
+    path: author/agent.md
+
 # ============================================
 # VULNERABILITIES
 # ============================================

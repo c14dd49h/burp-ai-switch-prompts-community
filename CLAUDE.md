@@ -52,6 +52,8 @@ burp-ai-switch-prompts-community/
 │           ├── sensitive-data-exposure/detect.md
 │           ├── insecure-cookie/detect.md
 │           └── cors-misconfiguration/detect.md
+├── author/
+│   └── agent.md                <- Agent for creating/improving skills
 └── report/
     ├── agent.md                <- Report orchestrator
     ├── finding/
@@ -66,6 +68,7 @@ burp-ai-switch-prompts-community/
 |------|---------|
 | `taxonomy.yaml` | Source of truth for vulnerability/observation types |
 | `audit/agent.md` | Security testing agent (entry point) - methodical vulnerability research |
+| `author/agent.md` | Skill authoring - helps create and improve detection skills |
 | `report/agent.md` | Report orchestrator - coordinates finding + summary agents |
 | `report/finding/agent.md` | Writes professional finding descriptions |
 | `report/exec-summary/agent.md` | Generates executive summaries |
