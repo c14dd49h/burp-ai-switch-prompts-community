@@ -70,9 +70,18 @@ and **Y security controls** were verified as effective.
 | Low      | X     |
 | Info     | X     |
 
-## Risk Level: [CRITICAL/HIGH/MEDIUM/LOW]
+## Security Maturity: [Very Low/Low/Medium/High/Very High]
 
-[1-2 sentences explaining the overall risk level based on findings]
+[2-3 sentences explaining the rating based on findings]
+
+## Security Testing Objectives
+
+| Objective | Compliance | Comment |
+|-----------|------------|---------|
+| Authentication | ... | ... |
+| Authorization | ... | ... |
+| Input Validation | ... | ... |
+| ... | ... | ... |
 
 ## Critical Issues
 
@@ -106,14 +115,39 @@ and **Y security controls** were verified as effective.
 [Final assessment and next steps recommendation]
 ```
 
-## Risk Level Criteria
+## Security Maturity Rating
+
+Assign ONE level based on findings:
+
+| Rating | Criteria |
+|--------|----------|
+| Very Low | Multiple CRITICAL vulns; no basic security concepts |
+| Low | Multiple CRITICAL vulns; security present but flawed |
+| Medium | Multiple HIGH vulns; localized flawed implementations |
+| High | No CRITICAL/HIGH vulns; good security practices |
+| Very High | Only LOW/INFO vulns; state-of-the-art implementation |
+
+## Security Testing Objectives
+
+Map each finding to security objectives and determine compliance:
+
+| Objective | Compliance | Comment |
+|-----------|------------|---------|
+| Authentication | [Level] | [Finding/COVERED refs] |
+| Authorization | [Level] | [Finding/COVERED refs] |
+| Input Validation | [Level] | [Finding/COVERED refs] |
+| Data Protection | [Level] | [Finding/COVERED refs] |
+| Session Management | [Level] | [Finding/COVERED refs] |
+| Error Handling | [Level] | [Finding/COVERED refs] |
+
+### Compliance Levels
 
 | Level | Criteria |
 |-------|----------|
-| CRITICAL | Any CRITICAL finding OR 3+ HIGH findings |
-| HIGH | 1-2 HIGH findings OR 5+ MEDIUM findings |
-| MEDIUM | Only MEDIUM/LOW findings, limited exposure |
-| LOW | Only LOW/INFO findings, well-protected application |
+| Compliant | No vuln found AND COVERED confirms protection |
+| Partially Compliant | Controls exist but vulns found, OR only LOW/INFO issues |
+| Not Compliant | MEDIUM+ vulns with no effective mitigation |
+| Not Tested | No findings and no COVERED items (out of scope) |
 
 ## Writing guidelines
 
