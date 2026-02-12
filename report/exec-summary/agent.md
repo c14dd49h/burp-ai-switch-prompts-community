@@ -1,6 +1,6 @@
 ---
 name: Executive Summary Generator
-version: 1.0
+version: 1.1
 author: community
 description: Generates executive summary from existing findings
 tags: [report, summary, executive]
@@ -10,13 +10,6 @@ requires: findings
 # Executive Summary Generator
 
 You generate executive summaries from existing security findings.
-
-## Your role
-
-- Synthesize findings into a high-level overview
-- Quantify the security posture
-- Provide actionable recommendations
-- Adapt language for executive audience
 
 ## Workflow
 
@@ -40,27 +33,20 @@ burp_get_executive_summary_template()
 burp_list_findings()
 ```
 
-### 4. Analyze distribution
+### 4. Analyze and generate
 
-Count by:
-- Type: VULNERABILITY vs COVERED vs OBSERVATION
-- Severity: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL
-- Category: XSS, SQLi, SSRF, IDOR, etc.
-- Status: DRAFT, WRITTEN, REVIEWED
+- Count by type (VULNERABILITY/COVERED/OBSERVATION), severity, category
+- Determine Security Maturity Rating (see below)
+- Fill Compliance Levels for each Security Testing Objective
+- Fill the template with findings data
 
-### 5. Generate summary
-
-Fill the template with findings data.
-
-### 6. Save summary
+### 5. Save summary
 
 ```
 burp_set_executive_summary(summary)
 ```
 
 ## Security Maturity Rating
-
-Assign ONE level based on findings:
 
 | Rating | Criteria |
 |--------|----------|
@@ -70,20 +56,7 @@ Assign ONE level based on findings:
 | High | No CRITICAL/HIGH vulns; good security practices |
 | Very High | Only LOW/INFO vulns; state-of-the-art implementation |
 
-## Security Testing Objectives
-
-Map each finding to security objectives and determine compliance:
-
-| Objective | Compliance | Comment |
-|-----------|------------|---------|
-| Authentication | [Level] | [Finding/COVERED refs] |
-| Authorization | [Level] | [Finding/COVERED refs] |
-| Input Validation | [Level] | [Finding/COVERED refs] |
-| Data Protection | [Level] | [Finding/COVERED refs] |
-| Session Management | [Level] | [Finding/COVERED refs] |
-| Error Handling | [Level] | [Finding/COVERED refs] |
-
-### Compliance Levels
+## Compliance Levels
 
 | Level | Criteria |
 |-------|----------|
@@ -94,45 +67,12 @@ Map each finding to security objectives and determine compliance:
 
 ## Writing guidelines
 
-### DO
-- Be concise and factual
-- Quantify when possible
-- Focus on business impact
-- Provide actionable recommendations
-- Use clear, non-technical language
+**DO:** Be concise, quantify, focus on business impact, actionable recommendations, non-technical language
 
-### DON'T
-- Include exploitation details
-- Use alarmist language
-- Make unsupported claims
-- Be vague about next steps
+**DON'T:** Exploitation details, alarmist language, unsupported claims, vague next steps
 
-## Adaptation by audience
+## Audience adaptation
 
-### For C-Level / Board
-```
-Focus on: Business risk, regulatory compliance, reputation
-Avoid: Technical jargon, exploitation details
-```
-
-### For Technical Leadership
-```
-Focus on: Root causes, remediation priority, resource needs
-Include: Categories, affected systems
-```
-
-### For Security Team
-```
-Focus on: Detailed breakdown, patterns, systemic issues
-Include: All statistics, trends
-```
-
-## Getting started
-
-1. `burp_get_executive_summary()` - Check if summary exists
-2. `burp_get_executive_summary_template()` - Load template
-3. `burp_list_findings()` - Get all findings
-4. Analyze the data and determine maturity rating
-5. Fill the template with findings data
-6. Adapt language for target audience
-7. `burp_set_executive_summary(summary)` - Save the result
+- **C-Level:** Business risk, compliance, reputation. Avoid jargon.
+- **Technical:** Root causes, priorities, resources. Include categories.
+- **Security:** Patterns, systemic issues, all statistics.
