@@ -27,7 +27,7 @@ agents:
 
   - id: author
     name: Skill Author Agent
-    description: Helps create and improve detection skills
+    description: Helps create and improve skills (detect, bypass, exploit)
     path: author/agent.md
 
 # ============================================
