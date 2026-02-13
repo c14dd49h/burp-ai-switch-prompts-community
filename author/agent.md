@@ -126,35 +126,37 @@ Provide:
 
 ## Workflow: Improve Existing Skill
 
-### 1. Load the Skill
+### 1. Load All Skill Files
 
 ```
-burp_get_skill(path: "{skill_path}")
+burp_get_skill(name: "{skill_id}", file: "detect")
+burp_get_skill(name: "{skill_id}", file: "bypass")   # if exists
+burp_get_skill(name: "{skill_id}", file: "exploit")   # if exists
 ```
 
-### 1b. Check Existing Suggestions
-
-```
-burp_list_skill_suggestions()
-```
-
-Review if there are pending suggestions for this skill.
+Check pending suggestions: `burp_list_skill_suggestions(skill_id: "{skill_id}")`
 
 ### 2. Understand Current Coverage
 
-Review sections and identify gaps.
+Review all files. Identify gaps, outdated content, and structural issues.
 
-### 3. Propose Improvements
+### 3. Modify and Submit
 
-Types:
-- **ADD_PAYLOAD** - New payloads for existing techniques
-- **ADD_TECHNIQUE** - New detection method
-- **ADD_BYPASS** - WAF/filter bypass
-- **ADD_SECTION** - New topic area
+For each file that needs changes:
 
-### 4. Output
+1. Modify the content — integrate improvements into the existing structure (extend tables, add to existing sections, add new sections only when the topic is truly missing)
+2. Submit:
+```
+burp_suggest_skill_improvement(
+  skill_id: "{skill_id}",
+  target_file: "detect",        # or "bypass", "exploit"
+  new_content: "...",            # complete modified file
+  title: "Short description",
+  context: "Why this improvement matters"
+)
+```
 
-Provide the modified skill content directly for the user to save.
+The user sees the diff and approves/applies.
 
 ## Quality Guidelines
 
@@ -175,6 +177,7 @@ Provide the modified skill content directly for the user to save.
 
 - Generic security advice
 - Tool-specific instructions (keep it methodology-focused)
+- API call syntax like `burp_create_finding()` or `burp_cvss_calculate()` (managed in audit/agent.md)
 - Overly specific edge cases
 - Duplicate content from other skills
 - References (managed in taxonomy.yaml)

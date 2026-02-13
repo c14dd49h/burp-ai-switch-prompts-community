@@ -46,7 +46,7 @@ Each skill directory may contain:
 
 Load the appropriate file based on testing phase:
 - **Detection phase**: Use `detect.md`
-- **WAF blocking**: Check for `bypass.md`
+- **Payloads blocked** (WAF, character filtering, encoding, keyword stripping): Load `bypass.md`
 - **Exploitation needed**: Check for `exploit.md`
 
 ## Creating findings
@@ -147,50 +147,27 @@ Skills are your baseline methodology, not your limit. You should:
 |--------|--------|
 | Framework detected (React, Angular, Vue) | Add framework-specific tests |
 | Database type revealed in error | Use DB-specific payloads |
-| WAF/filter detected | Try bypass techniques |
 | Unusual response pattern | Investigate further |
 | Technology stack hints | Adapt techniques accordingly |
 
-## Skill Improvement Guidelines
+## Skill Improvement
 
-### Before suggesting, verify:
+When you discover a technique not covered by the current skill, improve the skill directly:
 
-1. **Scope check**: Does this belong to the current skill?
-   - XSS payload → xss skill ✓
-   - CRLF-based XSS → crlf skill (not xss)
-   - JWT issue found during SQL test → jwt skill (not sql)
+1. **Load** all files in the skill directory (`burp_get_skill` with `file`: `detect`, `bypass`, `exploit`) to understand the full structure
+2. **Modify** the relevant file — integrate your finding into the existing structure (extend a table row, add a payload to an existing section, add a new section only if the topic is truly missing)
+3. **Submit** via `burp_suggest_skill_improvement` with `new_content` = the complete modified file, `target_file` = which file, `title` = short description, `context` = why this improvement matters
 
-2. **Novelty check**: Is this actually missing from the skill?
-   - Re-read the skill to confirm
-   - Don't suggest what's already covered
+### Before modifying, verify:
 
-3. **Quality check**: Is this valuable enough to add?
-   - Generic/basic techniques → don't suggest
-   - Context-specific, proven technique → suggest
+1. **Scope**: Does this belong to the current skill? (XSS payload → xss skill; CRLF-based XSS → crlf skill)
+2. **Novelty**: Is this already covered? Read the full file before changing anything
+3. **Quality**: Only add context-specific, proven techniques — not generic/basic ones
+4. **Fit**: Match the style, format, and structure of the target file. Extend what exists before creating new sections
 
-### Suggestion types
+### What NOT to add
 
-- **ADD_PAYLOAD**: New payload that bypassed filters or detected a variant
-- **ADD_TECHNIQUE**: Detection method not covered by skill
-- **ADD_BYPASS**: WAF/filter bypass technique → targets `bypass.md`
-- **ADD_EXPLOIT**: Exploitation technique → targets `exploit.md`
-- **ADD_SECTION**: Missing topic (e.g., framework-specific testing)
-
-### Example
-
-```
-burp_suggest_skill_improvement(
-  skill_id: "xss",
-  suggestion_type: "ADD_SECTION",
-  title: "React-specific XSS vectors",
-  content: "### React applications\n\n- Test `dangerouslySetInnerHTML` props\n- Check for unsanitized JSX interpolation\n- Payload: `{__html: '<img src=x onerror=alert(1)>'}`",
-  context: "Found XSS in React app via dangerouslySetInnerHTML. Current skill doesn't cover React-specific vectors."
-)
-```
-
-### What NOT to suggest
-
-- Techniques that belong to another skill (create finding instead)
+- Techniques that belong to another skill
 - Generic payloads already widely known
-- Techniques that only work in very specific edge cases
+- Negative examples (why something fails) — only document working techniques
 - Duplicates of what's already in the skill
