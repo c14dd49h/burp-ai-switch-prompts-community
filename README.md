@@ -169,7 +169,6 @@ Skills can use these Burp AI Switch MCP tools:
 ### Active (Modify)
 - `burp_create_finding` - Create finding with `vuln_type` for categorization
 - `burp_update_finding` - Update finding status/content
-- `burp_export_findings` - Export to JSON/Markdown
 - `burp_set_executive_summary` - Save executive summary
 
 ### HTTP (Send requests)

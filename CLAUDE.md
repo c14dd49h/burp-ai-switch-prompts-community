@@ -204,8 +204,6 @@ These tools are available through Burp AI Switch:
 - `burp_create_finding` - Create VULNERABILITY or COVERED finding
 - `burp_update_finding` - Update finding content/status
 - `burp_delete_finding` - Remove a finding
-- `burp_export_findings` - Export to JSON or Markdown
-- `burp_import_findings` - Import findings
 - `burp_set_executive_summary` - Save executive summary
 
 ### HTTP (Send requests)
