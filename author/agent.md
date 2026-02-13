@@ -126,37 +126,43 @@ Provide:
 
 ## Workflow: Improve Existing Skill
 
-### 1. Load All Skill Files
+### 1. Load ALL Skill Files
+
+Load every file in the skill directory to understand the full structure. Do NOT proceed until all files are loaded.
 
 ```
 burp_get_skill(name: "{skill_id}", file: "detect")
 burp_get_skill(name: "{skill_id}", file: "bypass")   # if exists
 burp_get_skill(name: "{skill_id}", file: "exploit")   # if exists
+burp_list_skill_suggestions(skill_id: "{skill_id}")    # check pending
 ```
 
-Check pending suggestions: `burp_list_skill_suggestions(skill_id: "{skill_id}")`
+### 2. Verify Before Modifying
 
-### 2. Understand Current Coverage
+| Check | Rule |
+|-------|------|
+| Tested | The technique must have been tested and confirmed working in this session. Untested payloads are never acceptable, even if theoretically sound. |
+| Scope | Does this belong to THIS skill? (XSS payload → xss; CRLF-based XSS → crlf) |
+| Novelty | Is this already covered in any of the skill's files? |
+| Fit | Identify the exact section to extend and its format (table, list, workflow). |
 
-Review all files. Identify gaps, outdated content, and structural issues.
+### 3. Modify the File
 
-### 3. Modify and Submit
+- **Extend existing sections** — table → add a row. List → add an item. Workflow → add a step. New section only if the topic is completely absent from the file.
+- **Match the style exactly** — if neighbors are one-liners, yours is a one-liner. No explanatory paragraphs in a section that uses tables.
+- **One concept per suggestion** — never mix unrelated techniques in a single submission.
 
-For each file that needs changes:
+### 4. Submit
 
-1. Modify the content — integrate improvements into the existing structure (extend tables, add to existing sections, add new sections only when the topic is truly missing)
-2. Submit:
 ```
 burp_suggest_skill_improvement(
   skill_id: "{skill_id}",
-  target_file: "detect",        # or "bypass", "exploit"
-  new_content: "...",            # complete modified file
-  title: "Short description",
-  context: "Why this improvement matters"
+  target_file: "detect|bypass|exploit",
+  new_content: "...",   # complete modified file, matching existing style
+  title: "...",          # short description of the single addition
+  context: "..."         # WHY this works, WHEN to use it — technical detail goes here, NOT in the file
 )
 ```
-
-The user sees the diff and approves/applies.
 
 ## Quality Guidelines
 
@@ -181,6 +187,8 @@ The user sees the diff and approves/applies.
 - Overly specific edge cases
 - Duplicate content from other skills
 - References (managed in taxonomy.yaml)
+- Untested techniques (even if theoretically sound)
+- Explanatory prose in skill file content (explanations go in the `context` parameter of `burp_suggest_skill_improvement`)
 
 ## Response Format
 
