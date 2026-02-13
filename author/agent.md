@@ -99,9 +99,6 @@ Detect {vulnerability/observation} in web applications.
 **Covered:**
 - When: {conditions for marking as covered}
 
-## References
-
-- {Reference URL}
 ```
 
 ### 5. Generate Taxonomy Entry
@@ -134,6 +131,14 @@ Provide:
 ```
 burp_get_skill(path: "{skill_path}")
 ```
+
+### 1b. Check Existing Suggestions
+
+```
+burp_list_skill_suggestions()
+```
+
+Review if there are pending suggestions for this skill.
 
 ### 2. Understand Current Coverage
 
@@ -172,6 +177,7 @@ Provide the modified skill content directly for the user to save.
 - Tool-specific instructions (keep it methodology-focused)
 - Overly specific edge cases
 - Duplicate content from other skills
+- References (managed in taxonomy.yaml)
 
 ## Response Format
 
