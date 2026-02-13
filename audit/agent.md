@@ -60,7 +60,38 @@ burp_create_finding(
   vuln_type: "xss",
   cvss_vector: "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
   description: "...",
-  include_selection: true
+  evidence: [
+    {
+      request: "<raw HTTP request with XSS payload>",
+      response: "<raw HTTP response showing reflection>",
+      url: "https://target.com/search?q=...",
+      host: "target.com"
+    }
+  ]
+)
+```
+
+**Multi-step exploit** (e.g., Blind SQLi):
+```
+burp_create_finding(
+  title: "Blind SQL Injection on /api/users",
+  vuln_type: "sql",
+  cvss_vector: "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+  description: "Time-based blind SQLi allowing data extraction...",
+  evidence: [
+    {
+      request: "GET /api/users?id=1' AND SLEEP(5)-- HTTP/1.1\n...",
+      response: "HTTP/1.1 200 OK (5s delay observed)",
+      url: "https://target.com/api/users",
+      host: "target.com"
+    },
+    {
+      request: "GET /api/users?id=1' AND (SELECT SLEEP(5) WHERE database()='app')-- HTTP/1.1\n...",
+      response: "HTTP/1.1 200 OK (5s delay confirms DB name)",
+      url: "https://target.com/api/users",
+      host: "target.com"
+    }
+  ]
 )
 ```
 
@@ -71,7 +102,7 @@ burp_create_finding(
   severity: "COVERED",
   vuln_type: "sql",
   description: "...",
-  include_selection: true
+  evidence: [{ request: "...", response: "...", url: "...", host: "..." }]
 )
 ```
 
@@ -82,9 +113,11 @@ burp_create_finding(
   severity: "OBSERVATION",
   vuln_type: "version-disclosure",
   description: "...",
-  include_selection: true
+  evidence: [{ request: "...", response: "...", url: "...", host: "..." }]
 )
 ```
+
+**Always include evidence from your PoC requests** using the `evidence` array. This shows exactly what payloads worked.
 
 `vuln_type` = skill folder name. See `taxonomy.yaml` for CWE/OWASP refs.
 
